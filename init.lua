@@ -1,1 +1,1 @@
-require('init').setup()
+require('setup').setup()
