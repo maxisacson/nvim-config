@@ -1,6 +1,8 @@
 local M = {}
 
 function M.build_config(opt)
+    opt = opt or {}
+
     local default_opt = {
         disable_vim_cmake = vim.fn.executable("cmake") == 0,
         disable_telescope = false,

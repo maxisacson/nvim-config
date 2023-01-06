@@ -4,10 +4,6 @@ end
 
 local M = {}
 function M.setup(opt)
-    if string.find(package.path, opt.path) == nil then
-        package.path = opt.path .. "/?.lua;" .. package.path
-    end
-
     setup('globals').setup(opt)
     setup('utils')
     setup('plugins')
