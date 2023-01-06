@@ -1,16 +1,12 @@
-local function setup(mod)
-    return require('setup.' .. mod)
-end
-
 local M = {}
 function M.setup(opt)
-    setup('globals').setup(opt)
-    setup('utils')
-    setup('plugins')
-    setup('common')
-    setup('colorscheme')
-    setup('python')
-    setup('terminal')
-    setup('custom')
+    require('setup.globals').setup(opt)
+    require('setup.utils')
+    require('setup.plugins')
+    require('setup.common')
+    require('setup.colorscheme')
+    require('setup.python')
+    require('setup.terminal')
+    require('setup.custom')
 end
 return M
