@@ -18,10 +18,6 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     command = "source <afile> | PackerCompile"
 })
 
-local function setup(mod)
-    return string.format('require("setup.%s")', mod)
-end
-
 local packer = require('packer')
 return packer.startup({
     function(use)
@@ -37,18 +33,18 @@ return packer.startup({
         use {
             'scrooloose/nerdcommenter',
             disable = vimrc.disable_nerdcommenter,
-            config = setup('nerdcommenter')
+            config = function() require('setup.nerdcommenter') end
         }
 
         -- Comment.nvim -- like nerdcommenter but in Lua
         use {
             'numToStr/Comment.nvim',
             disable = vimrc.disable_commentnvim,
-            config = setup('comment')
+            config = function() require('setup.comment') end
         }
 
         -- vim-easy-align for easy alignment
-        use { 'junegunn/vim-easy-align', config = setup('easyalign') }
+        use { 'junegunn/vim-easy-align', config = function() require('setup.easyalign') end }
 
         -- vim-surround
         use 'tpope/vim-surround'
@@ -88,7 +84,7 @@ return packer.startup({
         use {
             'rhysd/vim-clang-format',
             disable = vimrc.disable_clang_format,
-            config = setup('clang-format')
+            config = function() require('setup.clang-format') end
         }
 
         -- vim-cmake
@@ -98,7 +94,7 @@ return packer.startup({
         use {
             'neovim/nvim-lspconfig',
             disable = vimrc.disable_lsp,
-            config = setup('lsp'),
+            config = function() require('setup.lsp') end,
             requires = {
                 'williamboman/mason.nvim',
                 'williamboman/mason-lspconfig.nvim'
@@ -141,7 +137,7 @@ return packer.startup({
                 { 'hrsh7th/cmp-cmdline' },
                 { 'dmitmel/cmp-cmdline-history' }
             },
-            config = setup('nvim-cmp')
+            config = function() require('setup.nvim-cmp') end
         }
 
         -- VSCode-like icons in completion menu
@@ -155,7 +151,7 @@ return packer.startup({
             'nvim-treesitter/nvim-treesitter',
             disable = vimrc.disable_treesitter,
             run = ':TSUpdate',
-            config = setup('treesitter')
+            config = function() require('setup.treesitter') end
         }
 
         -- feline airline alternative
@@ -163,16 +159,16 @@ return packer.startup({
             'feline-nvim/feline.nvim',
             requires = {
                 { 'kyazdani42/nvim-web-devicons' },
-                { 'lewis6991/gitsigns.nvim', config = setup('gitsigns') }
+                { 'lewis6991/gitsigns.nvim', config = function() require('setup.gitsigns') end }
             },
-            config = setup('feline')
+            config = function() require('setup.feline') end
         }
 
         -- tabline plugin
         use {
             'romgrk/barbar.nvim',
             requires = 'kyazdani42/nvim-web-devicons',
-            config = setup('barbar')
+            config = function() require('setup.barbar') end
         }
 
         -- gruvbox theme
@@ -186,7 +182,7 @@ return packer.startup({
         use {
             'kyazdani42/nvim-tree.lua',
             requires = 'kyazdani42/nvim-web-devicons',
-            config = setup('nvim-tree')
+            config = function() require('setup.nvim-tree') end
         }
 
         -- Telescope -- modular fuzzy finder
@@ -197,7 +193,7 @@ return packer.startup({
                 { 'nvim-lua/plenary.nvim' },
                 { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
             },
-            config = setup('telescope')
+            config = function() require('setup.telescope') end
         }
         use { 'nvim-telescope/telescope-ui-select.nvim',
             config = function()
@@ -206,14 +202,14 @@ return packer.startup({
         }
 
         -- Visualize the undo tree
-        use { 'mbbill/undotree', config = setup('undotree') }
+        use { 'mbbill/undotree', config = function() require('setup.undotree') end }
 
         -- To enable more features from rust-analyzer
         use { 'simrat39/rust-tools.nvim', requires = 'nvim-lua/popup.nvim' }
 
         -- Debugging
-        use { 'mfussenegger/nvim-dap', config = setup('nvim-dap') }
-        use { 'rcarriga/nvim-dap-ui', config = setup('nvim-dap-ui') }
+        use { 'mfussenegger/nvim-dap', config = function() require('setup.nvim-dap') end }
+        use { 'rcarriga/nvim-dap-ui', config = function() require('setup.nvim-dap-ui') end }
         use { 'nvim-telescope/telescope-dap.nvim',
             config = function() require 'telescope'.load_extension('dap') end }
         use { 'theHamsta/nvim-dap-virtual-text',
