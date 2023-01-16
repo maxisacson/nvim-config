@@ -9,8 +9,6 @@ local lspconfig = require('lspconfig')
 
 local ok, telescope = pcall(require, 'telescope.builtin')
 
-local ag_autoformat = vim.api.nvim_create_augroup('AutoFormatGoFile', { clear = true })
-
 local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -53,15 +51,6 @@ local on_attach = function(client, bufnr)
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.documentFormattingProvider then
         map('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format document')
-
-        if vim.bo.filetype == 'go' then
-            vim.api.nvim_create_autocmd('BufWrite', {
-                group = ag_autoformat,
-                buffer = bufnr,
-                callback = function() vim.lsp.buf.format({ async = true }) end
-            })
-        end
-
     end
 
     if client.server_capabilities.documentRangeFormattingProvider then
