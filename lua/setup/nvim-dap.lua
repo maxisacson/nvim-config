@@ -15,3 +15,27 @@ map('n', '<Leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint con
 map('n', '<Leader>lg', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, 'Set log point')
 map('n', '<Leader>dr', dap.repl.open, 'Open REPL')
 map('n', '<Leader>dl', dap.run_last, 'Run last')
+
+dap.adapters.codelldb = {
+    type = 'server',
+    port = '${port}',
+    executable = {
+        command = 'codelldb',
+        args = { '--port', '${port}' },
+    },
+}
+
+dap.configurations.cpp = {
+    {
+        type = 'codelldb',
+        request = 'launch',
+        name = '[LLDB] Launch executable',
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+    }
+}
+dap.configurations.c = dap.configurations.cpp
