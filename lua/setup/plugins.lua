@@ -124,6 +124,17 @@ return packer.startup({
             end
         }
 
+        -- null-ls for non-LSP sources
+        use {
+            "jose-elias-alvarez/null-ls.nvim",
+            config = function()
+                require("null-ls").setup({
+                    sources = require('null-ls').builtins.diagnostics.mypy
+                })
+            end,
+            requires = { "nvim-lua/plenary.nvim" },
+        }
+
         -- nvim-cmp for autocompletion
         use {
             'hrsh7th/nvim-cmp', disable = vimrc.disable_nvim_cmp,
