@@ -169,7 +169,7 @@ return packer.startup({
         use {
             'feline-nvim/feline.nvim',
             requires = {
-                { 'kyazdani42/nvim-web-devicons' },
+                { 'nvim-tree/nvim-web-devicons' },
                 { 'lewis6991/gitsigns.nvim', config = function() require('setup.gitsigns') end }
             },
             config = function() require('setup.feline') end
@@ -178,7 +178,7 @@ return packer.startup({
         -- tabline plugin
         use {
             'romgrk/barbar.nvim',
-            requires = 'kyazdani42/nvim-web-devicons',
+            requires = 'nvim-tree/nvim-web-devicons',
             config = function() require('setup.barbar') end
         }
 
@@ -191,8 +191,8 @@ return packer.startup({
 
         -- NvimTree alternative to NerdTree
         use {
-            'kyazdani42/nvim-tree.lua',
-            requires = 'kyazdani42/nvim-web-devicons',
+            'nvim-tree/nvim-tree.lua',
+            requires = 'nvim-tree/nvim-web-devicons',
             config = function() require('setup.nvim-tree') end
         }
 
