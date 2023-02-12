@@ -82,6 +82,15 @@ opt.swapfile = false
 opt.backup = false
 opt.undofile = true
 
+-- dark background and 24 bit colors
+opt.termguicolors = true
+opt.background = 'dark'
+
+-- hide mode when using status line plugins
+opt.showmode = false
+
+-- allow buffers to be open in the background
+opt.hidden = true
 
 local function map(...) vim.keymap.set(...) end
 
@@ -106,7 +115,6 @@ map('n', '<Leader>>', '<C-w>>')
 map('n', '<Leader><', '<C-w><')
 
 -- Buffer management
-opt.hidden = true -- allow buffers to be open in the background
 map('n', '<Leader><Leader>', '<C-^>')
 -- " if !g:vimrc.enable_barbar
 -- "     nnoremap <Leader>w :bprev<CR>
