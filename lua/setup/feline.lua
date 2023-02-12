@@ -5,8 +5,6 @@ local components = {
     inactive = {},
 }
 
-vim.o.showmode = false
-
 table.insert(components.active, {})
 table.insert(components.active, {})
 table.insert(components.active, {})

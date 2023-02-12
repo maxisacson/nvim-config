@@ -7,7 +7,7 @@ require('mason-lspconfig').setup({
 
 local lspconfig = require('lspconfig')
 
-local ok, telescope = pcall(require, 'telescope.builtin')
+local telescope_ok, telescope = pcall(require, 'telescope.builtin')
 
 local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -30,7 +30,7 @@ local on_attach = function(client, bufnr)
     map('n', ']d', vim.diagnostic.goto_next, 'Goto next diagnostic')
     map('n', '<space>a', vim.lsp.buf.code_action, 'Code action')
 
-    if ok then
+    if telescope_ok then
         map('n', 'gr', telescope.lsp_references, 'Goto reference')
         map('n', 'gd', telescope.lsp_definitions, 'Goto definition')
         map('n', '<space>D', telescope.lsp_type_definitions, 'Goto type definition')
@@ -119,12 +119,12 @@ lspconfig.pylsp.setup {
     },
 }
 
-require('rust-tools').setup {
-    server = {
-        on_attach = on_attach,
-        capabilities = capabilities
-    }
-}
+-- require('rust-tools').setup {
+--     server = {
+--         on_attach = on_attach,
+--         capabilities = capabilities
+--     }
+-- }
 
 lspconfig.clangd.setup {
     on_attach = on_attach,
