@@ -1,7 +1,7 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
-        'clangd', 'pylsp', 'cmake', 'tsserver', 'sumneko_lua', 'marksman'
+        'clangd', 'pylsp', 'cmake', 'tsserver', 'lua_ls', 'marksman'
     }
 })
 
@@ -161,7 +161,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { vim.g.vimrc.lualsp_cmd },
