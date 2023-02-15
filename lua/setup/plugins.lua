@@ -165,7 +165,10 @@ require('lazy').setup({
     -- tabline plugin
     {
         'akinsho/bufferline.nvim',
-        dependencies = 'nvim-tree/nvim-web-devicons',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'famiu/bufdelete.nvim',
+        },
         config = function()
             require('setup.bufferline')
         end
