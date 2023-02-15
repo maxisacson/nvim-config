@@ -28,6 +28,20 @@ require('bufferline').setup({
         },
         separator_style = { '', '' },
         tab_size = 0,
+        name_formatter = function(buf)
+            local name = buf.name
+            if (name == nil or name == '') then
+                if string.match(buf.path, 'fugitive://') ~= nil then
+                    name = '[Git]'
+                elseif buf.bufnr ~= nil then
+                    name = string.format("[buffer %s]", buf.bufnr)
+                end
+            end
+            return name
+        end,
+        close_command = function(bufnr) require('bufdelete').bufdelete(bufnr, true) end,
+        middle_mouse_command = function(bufnr) require('bufdelete').bufdelete(bufnr, true) end,
+        right_mouse_command = nil,
     },
     highlights = {
         fill = {
@@ -114,8 +128,9 @@ nmap('<Leader>6', function() require('bufferline').go_to_buffer(6, true) end)
 nmap('<Leader>7', function() require('bufferline').go_to_buffer(7, true) end)
 nmap('<Leader>8', function() require('bufferline').go_to_buffer(8, true) end)
 nmap('<Leader>9', function() require('bufferline').go_to_buffer(9, true) end)
-nmap('<Leader>0', function() require('bufferline').go_to_buffer(-1, true) end)
-nmap('<Leader>qq', function() vim.api.nvim_buf_delete(0, {}) end)
+nmap('<Leader>0', function() require('bufferline').go_to_buffer( -1, true) end)
+nmap('<Leader>qq', function() require('bufdelete').bufdelete(0, false) end)
+nmap('<Leader>qQ', function() require('bufdelete').bufdelete(0, true) end)
 
 nmap('<Leader>w', ':BufferLineCyclePrev<CR>')
 nmap('<Leader>e', ':BufferLineCycleNext<CR>')
