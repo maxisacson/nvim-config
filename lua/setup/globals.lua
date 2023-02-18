@@ -14,7 +14,6 @@ function M.build_config(opt)
         disable_nerdcommenter = true,
         disable_commentnvim = false,
 
-        colorscheme = "gruvbox",
         override_python3_host_prog = false,
         python3_host_prog = "python",
         pylsp_cmd = "pylsp",
