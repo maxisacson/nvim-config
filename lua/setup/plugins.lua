@@ -31,7 +31,10 @@ require('lazy').setup({
     },
 
     -- vim-easy-align for easy alignment
-    { 'junegunn/vim-easy-align', config = function() require('setup.easyalign') end },
+    {
+        'junegunn/vim-easy-align',
+        config = function() require('setup.easyalign') end
+    },
 
     -- vim-surround
     'tpope/vim-surround',
@@ -78,7 +81,10 @@ require('lazy').setup({
     },
 
     -- vim-cmake
-    { 'vhdirk/vim-cmake', enabled = not vimrc.disable_vim_cmake },
+    {
+        'vhdirk/vim-cmake',
+        enabled = not vimrc.disable_vim_cmake
+    },
 
     -- LSP configurations for neovim
     {
@@ -92,10 +98,14 @@ require('lazy').setup({
     },
 
     -- better support for lsp colors
-    { 'folke/lsp-colors.nvim', enabled = not vimrc.disable_lsp },
+    {
+        'folke/lsp-colors.nvim',
+        enabled = not vimrc.disable_lsp
+    },
 
     -- lsp status spinner
-    { 'j-hui/fidget.nvim',
+    {
+        'j-hui/fidget.nvim',
         enabled = not vimrc.disable_lsp,
         config = function()
             require('fidget').setup({ text = { spinner = "dots", } })
@@ -127,9 +137,13 @@ require('lazy').setup({
 
     -- nvim-cmp for autocompletion
     {
-        'hrsh7th/nvim-cmp', enabled = not vimrc.disable_nvim_cmp,
+        'hrsh7th/nvim-cmp',
+        enabled = not vimrc.disable_nvim_cmp,
         dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp', enabled = not vimrc.disable_lsp },
+            {
+                'hrsh7th/cmp-nvim-lsp',
+                enabled = not vimrc.disable_lsp
+            },
             { 'L3MON4D3/LuaSnip' }, -- snippet plugin
             { 'saadparwaiz1/cmp_luasnip' }, -- snippet source
             { 'hrsh7th/cmp-buffer' }, -- buffer source
@@ -142,10 +156,16 @@ require('lazy').setup({
     },
 
     -- VSCode-like icons in completion menu
-    { 'onsails/lspkind-nvim', enabled = not vimrc.disable_nvim_cmp },
+    {
+        'onsails/lspkind-nvim',
+        enabled = not vimrc.disable_nvim_cmp
+    },
 
     -- preconfigured snippets
-    { 'rafamadriz/friendly-snippets', enabled = not vimrc.disable_nvim_cmp },
+    {
+        'rafamadriz/friendly-snippets',
+        enabled = not vimrc.disable_nvim_cmp
+    },
 
     -- treesitter
     {
@@ -160,7 +180,10 @@ require('lazy').setup({
         'feline-nvim/feline.nvim',
         dependencies = {
             { 'nvim-tree/nvim-web-devicons' },
-            { 'lewis6991/gitsigns.nvim', config = function() require('setup.gitsigns') end }
+            {
+                'lewis6991/gitsigns.nvim',
+                config = function() require('setup.gitsigns') end
+            }
         },
         config = function() require('setup.feline') end
     },
@@ -190,8 +213,10 @@ require('lazy').setup({
     },
 
     -- visualize color codes
-    { 'norcalli/nvim-colorizer.lua',
-        config = function() require 'colorizer'.setup() end },
+    {
+        'norcalli/nvim-colorizer.lua',
+        config = function() require 'colorizer'.setup() end
+    },
 
     -- NvimTree alternative to NerdTree
     {
@@ -217,7 +242,10 @@ require('lazy').setup({
     },
 
     -- Visualize the undo tree
-    { 'mbbill/undotree', config = function() require('setup.undotree') end },
+    {
+        'mbbill/undotree',
+        config = function() require('setup.undotree') end
+    },
 
     -- To enable more features from rust-analyzer
     {
