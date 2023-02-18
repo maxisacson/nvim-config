@@ -4,6 +4,11 @@ require('mason-lspconfig').setup({
         'clangd', 'pylsp', 'cmake', 'tsserver', 'lua_ls', 'marksman'
     }
 })
+require('fidget').setup({
+    text = {
+        spinner = "dots",
+    }
+})
 
 local lspconfig = require('lspconfig')
 
@@ -80,7 +85,9 @@ local on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd('CursorHold',
             { group = g, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
         vim.api.nvim_create_autocmd('CursorMoved', { group = g, buffer = bufnr, callback = vim.lsp.buf.clear_references })
-        vim.api.nvim_create_autocmd('CursorHold', { group = g, buffer = bufnr,
+        vim.api.nvim_create_autocmd('CursorHold', {
+            group = g,
+            buffer = bufnr,
             callback = function()
                 vim.diagnostic.open_float({ show_header = false, focusable = false })
             end
@@ -135,26 +142,26 @@ lspconfig.clangd.setup {
         "--compile-commands-dir=build",
         "--clang-tidy",
         "--clang-tidy-checks='" ..
-            "-*," ..
-            "clang-analyzer-*," ..
-            "modernize-*," ..
-            "readability-*," ..
-            "performance-*," ..
-            "cppcoreguidelines-*," ..
-            "bugprone-*," ..
-            "cert-*," ..
-            "hicpp-*," ..
-            "-cppcoreguidelines-pro-bounds-constant-array-index," ..
-            "-cppcoreguidelines-pro-bounds-array-to-pointer-decay," ..
-            "-cppcoreguidelines-avoid-magic-numbers," ..
-            "-readability-braces-around-statements," ..
-            "-readability-magic-numbers," ..
-            "-hicpp-braces-around-statements," ..
-            "-hicpp-no-array-decay," ..
-            "-hicpp-uppercase-literal-suffix," ..
-            "-readability-uppercase-literal-suffix," ..
-            "-modernize-use-trailing-return-type," ..
-            "'" }
+        "-*," ..
+        "clang-analyzer-*," ..
+        "modernize-*," ..
+        "readability-*," ..
+        "performance-*," ..
+        "cppcoreguidelines-*," ..
+        "bugprone-*," ..
+        "cert-*," ..
+        "hicpp-*," ..
+        "-cppcoreguidelines-pro-bounds-constant-array-index," ..
+        "-cppcoreguidelines-pro-bounds-array-to-pointer-decay," ..
+        "-cppcoreguidelines-avoid-magic-numbers," ..
+        "-readability-braces-around-statements," ..
+        "-readability-magic-numbers," ..
+        "-hicpp-braces-around-statements," ..
+        "-hicpp-no-array-decay," ..
+        "-hicpp-uppercase-literal-suffix," ..
+        "-readability-uppercase-literal-suffix," ..
+        "-modernize-use-trailing-return-type," ..
+        "'" }
 }
 
 local runtime_path = vim.split(package.path, ';')

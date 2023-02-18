@@ -13,6 +13,18 @@ vim.opt.rtp:prepend(lazypath)
 
 local vimrc = vim.g.vimrc
 require('lazy').setup({
+    -- gruvbox theme
+    {
+        'ellisonleao/gruvbox.nvim',
+        dependencies = 'rktjmp/lush.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require('gruvbox').setup {}
+            vim.cmd [[colorscheme gruvbox]]
+        end
+    },
+
     -- vim-fugitive for git integration
     'tpope/vim-fugitive',
 
@@ -81,23 +93,10 @@ require('lazy').setup({
         config = function() require('setup.lsp') end,
         dependencies = {
             'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim'
+            'williamboman/mason-lspconfig.nvim',
+            'j-hui/fidget.nvim', -- lsp status spinner
+            'folke/lsp-colors.nvim', -- better support for lsp colors
         }
-    },
-
-    -- better support for lsp colors
-    {
-        'folke/lsp-colors.nvim',
-        enabled = not vimrc.disable_lsp
-    },
-
-    -- lsp status spinner
-    {
-        'j-hui/fidget.nvim',
-        enabled = not vimrc.disable_lsp,
-        config = function()
-            require('fidget').setup({ text = { spinner = "dots", } })
-        end
     },
 
     -- live parameter hints
@@ -128,31 +127,18 @@ require('lazy').setup({
         'hrsh7th/nvim-cmp',
         enabled = not vimrc.disable_nvim_cmp,
         dependencies = {
-            {
-                'hrsh7th/cmp-nvim-lsp',
-                enabled = not vimrc.disable_lsp
-            },
+            { 'hrsh7th/cmp-nvim-lsp' },
             { 'L3MON4D3/LuaSnip' }, -- snippet plugin
             { 'saadparwaiz1/cmp_luasnip' }, -- snippet source
             { 'hrsh7th/cmp-buffer' }, -- buffer source
             { 'hrsh7th/cmp-path' }, -- path source
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-cmdline' },
-            { 'dmitmel/cmp-cmdline-history' }
+            { 'dmitmel/cmp-cmdline-history' },
+            { 'onsails/lspkind-nvim' }, -- VSCode-like icons in completion menu
+            { 'rafamadriz/friendly-snippets' }, -- preconfigured snippets
         },
         config = function() require('setup.nvim-cmp') end
-    },
-
-    -- VSCode-like icons in completion menu
-    {
-        'onsails/lspkind-nvim',
-        enabled = not vimrc.disable_nvim_cmp
-    },
-
-    -- preconfigured snippets
-    {
-        'rafamadriz/friendly-snippets',
-        enabled = not vimrc.disable_nvim_cmp
     },
 
     -- treesitter
@@ -188,18 +174,6 @@ require('lazy').setup({
         end
     },
 
-    -- gruvbox theme
-    {
-        'ellisonleao/gruvbox.nvim',
-        dependencies = 'rktjmp/lush.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require('gruvbox').setup {}
-            vim.cmd [[colorscheme gruvbox]]
-        end
-    },
-
     -- visualize color codes
     {
         'norcalli/nvim-colorizer.lua',
@@ -219,14 +193,10 @@ require('lazy').setup({
         enabled = not vimrc.disable_telescope,
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+            { 'nvim-telescope/telescope-ui-select.nvim' },
         },
         config = function() require('setup.telescope') end
-    },
-    { 'nvim-telescope/telescope-ui-select.nvim',
-        config = function()
-            require('telescope').load_extension('ui-select')
-        end
     },
 
     -- Visualize the undo tree
