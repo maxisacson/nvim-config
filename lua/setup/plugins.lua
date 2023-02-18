@@ -42,9 +42,6 @@ require('lazy').setup({
     -- vim-repeat
     'tpope/vim-repeat',
 
-    -- GLSL syntax
-    'tikhomirov/vim-glsl',
-
     -- latex plugin
     {
         'lervag/vimtex',
@@ -57,9 +54,6 @@ require('lazy').setup({
 
     -- for diffing blocks of text
     'AndrewRadev/linediff.vim',
-
-    -- extra syntax for cpp-files
-    'maxisacson/vim-cpp-extra',
 
     -- extra syntax for tex- and bib-files
     'maxisacson/vim-latex-extra',
@@ -78,12 +72,6 @@ require('lazy').setup({
         'rhysd/vim-clang-format',
         enabled = not vimrc.disable_clang_format,
         config = function() require('setup.clang-format') end
-    },
-
-    -- vim-cmake
-    {
-        'vhdirk/vim-cmake',
-        enabled = not vimrc.disable_vim_cmake
     },
 
     -- LSP configurations for neovim
