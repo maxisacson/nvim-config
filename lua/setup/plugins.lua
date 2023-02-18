@@ -43,7 +43,10 @@ require('lazy').setup({
     'tikhomirov/vim-glsl',
 
     -- latex plugin
-    { 'lervag/vimtex',
+    {
+        'lervag/vimtex',
+        lazy = true,
+        ft = 'tex',
         config = function()
             vim.g.vimtex_compiler_latexmk = { callback = 0 }
         end
@@ -217,7 +220,11 @@ require('lazy').setup({
     { 'mbbill/undotree', config = function() require('setup.undotree') end },
 
     -- To enable more features from rust-analyzer
-    { 'simrat39/rust-tools.nvim', dependencies = 'nvim-lua/popup.nvim' },
+    {
+        'simrat39/rust-tools.nvim',
+        lazy = true,
+        dependencies = 'nvim-lua/popup.nvim'
+    },
 
     -- Debugging
     {
