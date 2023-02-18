@@ -102,11 +102,14 @@ require('lazy').setup({
     -- live parameter hints
     {
         'ray-x/lsp_signature.nvim',
-        enabled = not vimrc.disable_lsp or vimrc.disable_lsp_signature,
+        enabled = not vimrc.disable_lsp_signature,
         config = function()
             require 'lsp_signature'.setup({
-                hint_enable = false,
-                hint_prefix = "param: "
+                floating_window = true, -- show signature in floating window
+                hint_enable = false, -- disable virtual text
+                handler_opts = {
+                    border = 'none',
+                }
             })
         end
     },
@@ -132,7 +135,7 @@ require('lazy').setup({
             { 'saadparwaiz1/cmp_luasnip' }, -- snippet source
             { 'hrsh7th/cmp-buffer' }, -- buffer source
             { 'hrsh7th/cmp-path' }, -- path source
-            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+            -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-cmdline' },
             { 'dmitmel/cmp-cmdline-history' },
             { 'onsails/lspkind-nvim' }, -- VSCode-like icons in completion menu

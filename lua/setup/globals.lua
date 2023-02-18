@@ -8,7 +8,7 @@ function M.build_config(opt)
         disable_lsp = false,
         disable_treesitter = false,
         disable_nvim_cmp = false,
-        disable_lsp_signature = true,
+        disable_lsp_signature = false,
         disable_clang_format = true,
         disable_nerdcommenter = true,
         disable_commentnvim = false,
