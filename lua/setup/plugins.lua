@@ -137,7 +137,6 @@ require('lazy').setup({
             { 'hrsh7th/cmp-path' }, -- path source
             -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-cmdline' },
-            { 'dmitmel/cmp-cmdline-history' },
             { 'onsails/lspkind-nvim' }, -- VSCode-like icons in completion menu
             { 'rafamadriz/friendly-snippets' }, -- preconfigured snippets
         },
