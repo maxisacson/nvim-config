@@ -153,7 +153,7 @@ require('lazy').setup({
 
     -- feline airline alternative
     {
-        'feline-nvim/feline.nvim',
+        'freddiehaddad/feline.nvim',
         dependencies = {
             { 'nvim-tree/nvim-web-devicons' },
             {
