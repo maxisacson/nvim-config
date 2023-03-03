@@ -39,4 +39,4 @@ end
 
 require('telescope').load_extension('dap')
 require('nvim-dap-virtual-text').setup({})
-require('dap-python').setup(vim.g.utils.python_interpreter())
+require('dap-python').setup(require('setup.utils').python_interpreter())

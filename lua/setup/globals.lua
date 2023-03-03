@@ -21,8 +21,6 @@ function M.build_config(opt)
         arduinolsp_cmd = 'arduino-language-server',
         arduinolsp_fqbn = 'arduino:avr:uno',
         arduinocli_config = vim.env['HOME'] .. '/.arduino15/arduino-cli.yaml',
-
-        path = vim.env['HOME'] .. '/.config/nvim'
     }
 
     local user_opt = default_opt
