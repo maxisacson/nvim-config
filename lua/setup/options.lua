@@ -34,7 +34,7 @@ opt.hlsearch = false
 
 -- Always keep 2 line above and below cursor,
 -- and 5 columns to the right and left
-opt.scrolloff = 2
+opt.scrolloff = 5
 opt.sidescrolloff = 5
 
 -- Line numbering
