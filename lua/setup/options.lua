@@ -73,9 +73,12 @@ vim.cmd([[highlight ColorColumn ctermbg=Black]])
 -- Enable mouse
 opt.mouse = 'a'
 
+-- don't wrap lines
+opt.wrap = false
+
 -- show list chars
 opt.list = true
-opt.listchars = { tab = '└─', trail = '∙', nbsp = '␣' }
+opt.listchars = { tab = '└─', trail = '∙', nbsp = '␣', extends = '»', precedes = '«' }
 
 -- swapfile, undo, and backup
 opt.swapfile = false
