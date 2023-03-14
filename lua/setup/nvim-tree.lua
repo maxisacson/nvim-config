@@ -1,6 +1,10 @@
 -- config for nvim-tree
 
-require 'nvim-tree'.setup {}
+require 'nvim-tree'.setup({
+    modified = {
+        enable = true
+    }
+})
 
 vim.keymap.set('n', '<Leader>nt', ':NvimTreeToggle<CR>', { silent = true })
 vim.keymap.set('n', '<Leader>nf', ':NvimTreeFindFile!<CR>', { silent = true })
