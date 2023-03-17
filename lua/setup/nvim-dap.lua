@@ -20,6 +20,19 @@ dap.configurations.cpp = {
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
         args = {},
+    },
+    {
+        type = 'codelldb',
+        request = 'launch',
+        name = '[LLDB] Launch executable with args',
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = function()
+            return { vim.fn.input('Args: ') }
+        end,
     }
 }
 
