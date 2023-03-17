@@ -3,6 +3,11 @@
 require 'nvim-tree'.setup({
     modified = {
         enable = true
+    },
+    actions = {
+        open_file = {
+            resize_window = false,
+        }
     }
 })
 
