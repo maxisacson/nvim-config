@@ -15,10 +15,10 @@ map('n', '§', '<C-w>')
 
 
 -- Window resize bindings
-map('n', '<Leader>+', '<C-w>+')
-map('n', '<Leader>-', '<C-w>-')
-map('n', '<Leader>>', '<C-w>>')
-map('n', '<Leader><', '<C-w><')
+map('n', '<Leader>+', '<C-w>5+')
+map('n', '<Leader>-', '<C-w>5-')
+map('n', '<Leader>>', '<C-w>5>')
+map('n', '<Leader><', '<C-w>5<')
 
 -- Buffer management
 map('n', '<Leader><Leader>', '<C-^>')
