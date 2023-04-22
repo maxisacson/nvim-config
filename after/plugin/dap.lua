@@ -26,3 +26,9 @@ map('n', '<Leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Br
 map('n', '<Leader>dg', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, 'Set log point')
 map('n', '<Leader>dr', function() require('dap').repl.open() end, 'Open REPL')
 map('n', '<Leader>dl', function() require('dap').run_last() end, 'Run last')
+
+vim.fn.sign_define('DapBreakpoint', { text = '●', texthl = 'WarningMsg', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = '■', texthl = 'WarningMsg', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = '◆', texthl = 'MoreMsg', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '▶', texthl = 'Title', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointRejected', { text = '◌', texthl = 'WarningMsg', linehl = '', numhl = '' })
