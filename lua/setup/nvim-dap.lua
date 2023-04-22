@@ -53,3 +53,7 @@ end
 require('telescope').load_extension('dap')
 require('nvim-dap-virtual-text').setup({})
 require('dap-python').setup(require('setup.utils').python_interpreter())
+
+vim.api.nvim_create_user_command("DapuiOpen", function() require('dapui').open() end, {})
+vim.api.nvim_create_user_command("DapuiClose", function() require('dapui').close() end, {})
+vim.api.nvim_create_user_command("DapuiToggle", function() require('dapui').toggle() end, {})
