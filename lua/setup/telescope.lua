@@ -14,6 +14,7 @@ local map = function(mode, lhs, rhs, desc)
 end
 
 map('n', '<leader>ff', function() builtin.find_files({no_ignore=true}) end, 'Find files')
+map('n', '<leader>fv', builtin.git_files, 'Git files')
 map('n', '<leader>fg', builtin.live_grep, 'Line grep')
 map('n', '<leader>fb', builtin.buffers, 'Buffers')
 map('n', '<leader>fh', builtin.help_tags, 'Help tags')
