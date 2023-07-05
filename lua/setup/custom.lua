@@ -74,10 +74,10 @@ local lua_exec_and_append_current_line = function()
     local result = table.concat(vim.fn.split(vim.fn.execute('lua =' .. line), '\n'), '\\n ')
     local commentstring = vim.opt.commentstring:get()
     local ft = vim.opt.filetype:get()
-    if ft == nil or ft == "" or ft == "txt" then
+    if ft == nil or ft == "" or ft == "txt" or ft == "markdown" then
         result = '= ' .. result
     else
-        result = vim.fn.substitute(commentstring, '%s', '-> ' .. result, 'g')
+        result = vim.fn.substitute(commentstring, '%s', ' = ' .. result, 'g')
     end
     vim.api.nvim_buf_set_text(0, row, col, row, col, { ' ' .. result })
 end
