@@ -38,6 +38,23 @@ dap.configurations.cpp = {
 
 dap.configurations.c = dap.configurations.cpp
 
+local function launchjs_path()
+    local cwd = vim.fn.getcwd()
+
+    local path = cwd .. "/launch.json"
+    if vim.fn.filereadable(path) == 1 then
+        return path
+    end
+
+    path = cwd .. "/.launch.json"
+    if vim.fn.filereadable(path) == 1 then
+        return path
+    end
+
+    return nil
+end
+require('dap.ext.vscode').load_launchjs(launchjs_path(), { codelldb = { 'c', 'cpp' } })
+
 require('dapui').setup()
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
