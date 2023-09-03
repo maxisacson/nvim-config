@@ -1,7 +1,7 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
-        'clangd', 'pylsp', 'cmake', 'tsserver', 'lua_ls', 'marksman'
+        'clangd', 'pylsp', 'cmake', 'lua_ls', 'marksman'
     }
 })
 require('fidget').setup({
