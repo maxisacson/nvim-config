@@ -15,8 +15,6 @@ function M.build_config(opt)
 
         override_python3_host_prog = false,
         python3_host_prog = "python",
-        pylsp_cmd = "pylsp",
-        lualsp_cmd = "lua-language-server",
 
         arduinolsp_cmd = 'arduino-language-server',
         arduinolsp_fqbn = 'arduino:avr:uno',

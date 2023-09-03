@@ -116,7 +116,6 @@ end
 lspconfig.pylsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    -- cmd = { vim.g.vimrc.pylsp_cmd },
     settings = {
         pylsp = {
             plugins = {
@@ -171,7 +170,6 @@ table.insert(runtime_path, 'lua/?/init.lua')
 lspconfig.lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { vim.g.vimrc.lualsp_cmd },
     settings = {
         Lua = {
             runtime = {
