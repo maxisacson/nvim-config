@@ -185,6 +185,7 @@ return {
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
             { 'nvim-telescope/telescope-ui-select.nvim' },
+            { 'nvim-telescope/telescope-file-browser.nvim' },
         },
         config = function() require('setup.telescope') end
     },

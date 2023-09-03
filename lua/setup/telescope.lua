@@ -13,13 +13,16 @@ local map = function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { silent = true, desc = '[Telescope] ' .. desc })
 end
 
-map('n', '<leader>ff', function() builtin.find_files({no_ignore=true}) end, 'Find files')
+map('n', '<leader>ff', function() builtin.find_files({ no_ignore = true }) end, 'Find files')
 map('n', '<leader>fv', builtin.git_files, 'Git files')
 map('n', '<leader>fg', builtin.live_grep, 'Line grep')
 map('n', '<leader>fb', builtin.buffers, 'Buffers')
 map('n', '<leader>fh', builtin.help_tags, 'Help tags')
+map('n', '<leader>fk', builtin.keymaps, 'Keymaps')
+map('n', '<leader>fe', ":Telescope file_browser<CR>", 'File Browser')
 map('n', '<C-Space>', telescope_project_files, 'Project files')
 
+local fb_actions = require('telescope').extensions.file_browser.actions
 telescope.setup {
     defaults = {
         mappings = {
@@ -31,16 +34,17 @@ telescope.setup {
     },
     extensions = {
         fzf = {
-            fuzzy = true, -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
         },
         ['ui-select'] = {
-            require('telescope.themes').get_dropdown{}
-        }
+            require('telescope.themes').get_dropdown {}
+        },
     }
 }
 
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
+telescope.load_extension('file_browser')
