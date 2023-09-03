@@ -102,17 +102,6 @@ return {
         end
     },
 
-    -- null-ls for non-LSP sources
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            require("null-ls").setup({
-                sources = require('null-ls').builtins.diagnostics.mypy
-            })
-        end,
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
-
     -- nvim-cmp for autocompletion
     {
         'hrsh7th/nvim-cmp',

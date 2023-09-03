@@ -113,6 +113,9 @@ for _, lsp in ipairs(servers) do
 end
 
 -- Servers that do require special setup
+
+-- NOTE: To install pylsp-mypy run
+--          :PylspInstall pylsp-mypy
 lspconfig.pylsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
