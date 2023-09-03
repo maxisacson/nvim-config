@@ -13,8 +13,7 @@ function M.build_config(opt)
         disable_nerdcommenter = true,
         disable_commentnvim = false,
 
-        override_python3_host_prog = false,
-        python3_host_prog = "python",
+        python3_host_prog = "", -- empty for default
 
         arduinolsp_cmd = 'arduino-language-server',
         arduinolsp_fqbn = 'arduino:avr:uno',
