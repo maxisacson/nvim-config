@@ -10,6 +10,7 @@ require('fidget').setup({
     }
 })
 
+require('neodev').setup({})
 local lspconfig = require('lspconfig')
 
 local telescope_ok, telescope = pcall(require, 'telescope.builtin')
@@ -166,29 +167,40 @@ lspconfig.clangd.setup {
         "'" }
 }
 
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
+-- local runtime_path = vim.split(package.path, ';')
+-- table.insert(runtime_path, 'lua/?.lua')
+-- table.insert(runtime_path, 'lua/?/init.lua')
+
+-- lspconfig.lua_ls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     settings = {
+--         Lua = {
+--             runtime = {
+--                 version = "LuaJIT",
+--                 path = runtime_path
+--             },
+--             diagnostics = {
+--                 globals = { 'vim' }
+--             },
+--             workspace = {
+--                 library = vim.api.nvim_get_runtime_file('', true),
+--                 checkThirdParty = false,
+--             },
+--             telemetry = {
+--                 enable = false
+--             }
+--         }
+--     }
+-- }
 
 lspconfig.lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
         Lua = {
-            runtime = {
-                version = "LuaJIT",
-                path = runtime_path
-            },
-            diagnostics = {
-                globals = { 'vim' }
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file('', true),
-                checkThirdParty = false,
-            },
-            telemetry = {
-                enable = false
-            }
+            workspace = { checkThirdParty = false, },
+            telemetry = { enable = false }
         }
     }
 }

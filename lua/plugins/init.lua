@@ -84,6 +84,7 @@ return {
             'williamboman/mason-lspconfig.nvim',
             { 'j-hui/fidget.nvim', tag = 'legacy' }, -- lsp status spinner
             'folke/lsp-colors.nvim', -- better support for lsp colors
+            'folke/neodev.nvim', -- better config and plugin dev support
         }
     },
 
