@@ -9,6 +9,12 @@ dap.adapters.codelldb = {
     },
 }
 
+dap.adapters.cppdbg = {
+    id = 'cppdbg',
+    type = 'executable',
+    command = 'OpenDebugAD7'
+}
+
 dap.configurations.cpp = {
     {
         type = 'codelldb',
@@ -31,8 +37,46 @@ dap.configurations.cpp = {
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
         args = function()
-            return { vim.fn.input('Args: ') }
+            return { vim.fn.input('Args: ', '', 'file') }
         end,
+    },
+    {
+        type = 'cppdbg',
+        request = 'launch',
+        name = '[CppDbg] Launch executable',
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+        setupCommands = {
+            {
+                text = '-enable-pretty-printing',
+                description = 'enable pretty printing',
+                ignoreFailures = false,
+            },
+        }
+    },
+    {
+        type = 'cppdbg',
+        request = 'launch',
+        name = '[CppDbg] Launch executable with args',
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = function()
+            return { vim.fn.input('Args: ', '', 'file') }
+        end,
+        setupCommands = {
+            {
+                text = '-enable-pretty-printing',
+                description = 'enable pretty printing',
+                ignoreFailures = false,
+            },
+        }
     }
 }
 
