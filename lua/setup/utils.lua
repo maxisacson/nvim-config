@@ -14,4 +14,16 @@ function M.check_and_prompt_for_neovim_venv(venv_path)
     end
 end
 
+function M.hl(group)
+    return vim.api.nvim_get_hl_by_name(group, 1)
+end
+
+function M.fg(group)
+    return string.format('#%06x', M.hl(group).foreground)
+end
+
+function M.bg(group)
+    return string.format('#%06x', M.hl(group).background)
+end
+
 return M

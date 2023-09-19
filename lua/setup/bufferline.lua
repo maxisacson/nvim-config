@@ -1,7 +1,4 @@
-local function fg(group)
-    local hl = vim.api.nvim_get_hl_by_name(group, 1)
-    return string.format('#%06x', hl.foreground)
-end
+local fg = require('setup.utils').fg
 
 local bg0    = fg("GruvboxBg0")
 local bg1    = fg("GruvboxBg1")
