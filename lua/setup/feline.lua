@@ -1,3 +1,4 @@
+local fg = require('setup.utils').fg
 local vi_mode_utils = require('feline.providers.vi_mode')
 
 local components = {
@@ -188,31 +189,12 @@ table.insert(components.active[3], {
     provider = function()
         local line = vim.fn.line('.')
         local lines = vim.fn.line('$')
-
-        return vim.fn.round(100 * line / lines) .. '%%'
+        local col = vim.fn.col('.')
+        local percent = vim.fn.round(100 * line / lines)
+        return string.format('%d%%%% %d ☰ %d:%d', percent, lines, line, col)
     end,
     hl = { fg = colors.dark0, bg = colors.light4 },
     left_sep = { str = ' ', hl = { bg = colors.light4 } },
-    right_sep = { str = ' ', hl = { bg = colors.light4 } }
-})
-
-table.insert(components.active[3], {
-    provider = function()
-        local line = vim.fn.line('.')
-        local lines = vim.fn.line('$')
-        return string.format('☰ %d/%d ', line, lines)
-    end,
-    hl = { fg = colors.dark0, bg = colors.light4, style = 'bold' },
-    left_sep = '',
-    right_sep = ''
-})
-
-table.insert(components.active[3], {
-    provider = function()
-        return string.format(':%d', vim.fn.col('.'))
-    end,
-    hl = { fg = colors.dark0, bg = colors.light4 },
-    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
     right_sep = { str = ' ', hl = { bg = colors.light4 } }
 })
 
