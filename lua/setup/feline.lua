@@ -200,30 +200,30 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diagnostic_hints',
-    hl = { fg = colors.dark0, bg = colors.light4 },
-    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
-    right_sep = { str = ' ', hl = { bg = colors.light4 } }
+    hl = { fg = colors.dark0, bg = fg('DiagnosticHint') },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = fg('DiagnosticHint') } },
+    right_sep = { str = ' ', hl = { bg = fg('DiagnosticHint') } }
 })
 
 table.insert(components.active[3], {
     provider = 'diagnostic_info',
-    hl = { fg = colors.dark0, bg = colors.light4 },
-    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
-    right_sep = { str = ' ', hl = { bg = colors.light4 } }
+    hl = { fg = colors.dark0, bg = fg('DiagnosticInfo') },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = fg('DiagnosticInfo') } },
+    right_sep = { str = ' ', hl = { bg = fg('DiagnosticInfo') } }
 })
 
 table.insert(components.active[3], {
     provider = 'diagnostic_warnings',
-    hl = { fg = colors.dark0, bg = colors.bright_orange },
-    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_orange } },
-    right_sep = { str = ' ', hl = { bg = colors.bright_orange } }
+    hl = { fg = colors.dark0, bg = fg('DiagnosticWarn') },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = fg('DiagnosticWarn') } },
+    right_sep = { str = ' ', hl = { bg = fg('DiagnosticWarn') } }
 })
 
 table.insert(components.active[3], {
     provider = 'diagnostic_errors',
-    hl = { fg = colors.dark0, bg = colors.bright_red },
-    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_red } },
-    right_sep = { str = ' ', hl = { bg = colors.bright_red } }
+    hl = { fg = colors.dark0, bg = fg('DiagnosticError') },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = fg('DiagnosticError') } },
+    right_sep = { str = ' ', hl = { bg = fg('DiagnosticError') } }
 })
 
 table.insert(components.inactive[1], {
