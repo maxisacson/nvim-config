@@ -67,16 +67,15 @@ local on_attach = function(client, bufnr)
         vim.api.nvim_set_hl(0, ...)
     end
 
+    local bg = require('setup.utils').bg
+
     hi('LspDiagnosticsUnderlineError', { undercurl = 1, sp = 'Red' })
     hi('LspDiagnosticsUnderlineWarning', { undercurl = 1, sp = 'Orange' })
     hi('LspDiagnosticsUnderlineInformation', { undercurl = 1, sp = 'LightBlue' })
     hi('LspDiagnosticsUnderlineHint', { undercurl = 1, sp = 'LightGrey' })
-    hi('LspReferenceRead', {})
-    hi('LspReferenceWrite', {})
-    hi('LspReferenceText', {})
-    hi('LspReferenceRead', { reverse = 1 })
-    hi('LspReferenceWrite', { reverse = 1 })
-    hi('LspReferenceText', { reverse = 1 })
+    hi('LspReferenceRead', { bg=bg('Visual') })
+    hi('LspReferenceWrite', { bg=bg('Visual') })
+    hi('LspReferenceText', { bg=bg('Visual') })
 
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
