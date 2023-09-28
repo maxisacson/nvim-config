@@ -21,7 +21,7 @@ dap.configurations.cpp = {
         request = 'launch',
         name = '[LLDB] Launch executable',
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input({ prompt = 'Path to executable: ', default = vim.fn.getcwd() .. '/', completion = 'file' })
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
@@ -32,12 +32,12 @@ dap.configurations.cpp = {
         request = 'launch',
         name = '[LLDB] Launch executable with args',
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input({ prompt = 'Path to executable: ', default = vim.fn.getcwd() .. '/', completion = 'file' })
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
         args = function()
-            return { vim.fn.input('Args: ', '', 'file') }
+            return { vim.fn.input({ prompt = 'Args: ', default = '', completion = 'file' }) }
         end,
     },
     {
@@ -45,7 +45,7 @@ dap.configurations.cpp = {
         request = 'launch',
         name = '[CppDbg] Launch executable',
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input({ prompt = 'Path to executable: ', default = vim.fn.getcwd() .. '/', completion = 'file' })
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
@@ -63,12 +63,12 @@ dap.configurations.cpp = {
         request = 'launch',
         name = '[CppDbg] Launch executable with args',
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input({ prompt = 'Path to executable: ', default = vim.fn.getcwd() .. '/', completion = 'file' })
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
         args = function()
-            return { vim.fn.input('Args: ', '', 'file') }
+            return { vim.fn.input({ prompt = 'Args: ', default = '', completion = 'file' }) }
         end,
         setupCommands = {
             {
