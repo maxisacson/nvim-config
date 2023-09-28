@@ -110,6 +110,9 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
     require('dapui').close({})
 end
+dap.listeners.before.disconnect["dapui_config"] = function()
+    require('dapui').close({})
+end
 
 require('telescope').load_extension('dap')
 require('nvim-dap-virtual-text').setup({})
