@@ -20,6 +20,7 @@ map('n', '<leader>fb', builtin.buffers, 'Buffers')
 map('n', '<leader>fh', builtin.help_tags, 'Help tags')
 map('n', '<leader>fk', builtin.keymaps, 'Keymaps')
 map('n', '<leader>fe', ":Telescope file_browser<CR>", 'File Browser')
+map('n', '<leader>fr', builtin.resume, 'Resume picker')
 map('n', '<C-Space>', telescope_project_files, 'Project files')
 
 local fb_actions = require('telescope').extensions.file_browser.actions
