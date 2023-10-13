@@ -13,15 +13,23 @@ local map = function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { silent = true, desc = '[Telescope] ' .. desc })
 end
 
-map('n', '<leader>ff', function() builtin.find_files({ no_ignore = true }) end, 'Find files')
+map('n', '<leader>ff', builtin.find_files, 'Find files')
 map('n', '<leader>fv', builtin.git_files, 'Git files')
-map('n', '<leader>fg', builtin.live_grep, 'Line grep')
+map('n', '<leader>fg', builtin.live_grep, 'Live grep')
+map('n', '<leader>fs', builtin.grep_string, 'Grep string')
 map('n', '<leader>fb', builtin.buffers, 'Buffers')
 map('n', '<leader>fh', builtin.help_tags, 'Help tags')
 map('n', '<leader>fk', builtin.keymaps, 'Keymaps')
 map('n', '<leader>fe', ":Telescope file_browser<CR>", 'File Browser')
 map('n', '<leader>fr', builtin.resume, 'Resume picker')
+
 map('n', '<C-Space>', telescope_project_files, 'Project files')
+map('n', '<M-p>', telescope_project_files, 'Project files')
+map('n', '<M-Space>', builtin.buffers, 'Buffers')
+
+map('n', '<leader>fF', function() builtin.find_files({ no_ignore = true }) end, 'Find files (all)')
+map('n', '<leader>fG', function() builtin.live_grep({ additional_args = { '--no-ignore' } }) end, 'Live grep (all)')
+map('n', '<leader>fS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
 
 local fb_actions = require('telescope').extensions.file_browser.actions
 telescope.setup {
