@@ -209,12 +209,17 @@ return {
     -- Tmux integration
     {
         'aserowy/tmux.nvim',
-        config = function() require('tmux').setup({
-            navigation = {
-                cycle_navigation = false,
-                enable_default_keybindings = true,
-                persist_zoom = false,
-            },
-        }) end,
+        config = function()
+            require('tmux').setup({
+                navigation = {
+                    cycle_navigation = false,
+                    enable_default_keybindings = true,
+                    persist_zoom = false,
+                },
+                copy_sync = {
+                    enable = false,
+                },
+            })
+        end,
     },
 }
