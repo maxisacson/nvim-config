@@ -83,8 +83,8 @@ return {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
             { 'j-hui/fidget.nvim', tag = 'legacy' }, -- lsp status spinner
-            'folke/lsp-colors.nvim', -- better support for lsp colors
-            'folke/neodev.nvim', -- better config and plugin dev support
+            'folke/lsp-colors.nvim',                 -- better support for lsp colors
+            'folke/neodev.nvim',                     -- better config and plugin dev support
         }
     },
 
@@ -95,7 +95,7 @@ return {
         config = function()
             require 'lsp_signature'.setup({
                 floating_window = true, -- show signature in floating window
-                hint_enable = false, -- disable virtual text
+                hint_enable = false,    -- disable virtual text
                 handler_opts = {
                     border = 'none',
                 }
@@ -109,13 +109,13 @@ return {
         enabled = not vimrc.disable_nvim_cmp,
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
-            { 'L3MON4D3/LuaSnip' }, -- snippet plugin
+            { 'L3MON4D3/LuaSnip' },         -- snippet plugin
             { 'saadparwaiz1/cmp_luasnip' }, -- snippet source
-            { 'hrsh7th/cmp-buffer' }, -- buffer source
-            { 'hrsh7th/cmp-path' }, -- path source
+            { 'hrsh7th/cmp-buffer' },       -- buffer source
+            { 'hrsh7th/cmp-path' },         -- path source
             -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-cmdline' },
-            { 'onsails/lspkind-nvim' }, -- VSCode-like icons in completion menu
+            { 'onsails/lspkind-nvim' },         -- VSCode-like icons in completion menu
             { 'rafamadriz/friendly-snippets' }, -- preconfigured snippets
         },
         config = function() require('setup.nvim-cmp') end
@@ -173,7 +173,7 @@ return {
         enabled = not vimrc.disable_telescope,
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+            { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
             { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-telescope/telescope-file-browser.nvim' },
         },
