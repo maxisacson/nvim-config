@@ -97,7 +97,7 @@ local function launchjs_path()
 
     return nil
 end
-require('dap.ext.vscode').load_launchjs(launchjs_path(), { codelldb = { 'c', 'cpp' } })
+require('dap.ext.vscode').load_launchjs(launchjs_path(), { codelldb = { 'c', 'cpp' }, cppdbg = {'c', 'cpp'} })
 
 require('dapui').setup()
 
