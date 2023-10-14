@@ -1,3 +1,5 @@
+local globals = require('setup.globals')
+
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
@@ -208,8 +210,8 @@ lspconfig.arduino_language_server.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = {
-        vim.g.vimrc.arduinolsp_cmd,
-        '-cli-config', vim.g.vimrc.arduinocli_config,
-        '-fqbn', vim.g.vimrc.arduinolsp_fqbn
+        globals.arduinolsp_cmd,
+        '-cli-config', globals.arduinocli_config,
+        '-fqbn', globals.arduinolsp_fqbn
     }
 }

@@ -1,6 +1,8 @@
 -- Set python3 host program
-if vim.g.vimrc.python3_host_prog ~= "" then
-    vim.g.python3_host_prog = vim.g.vimrc.python3_host_prog
+local globals = require('setup.globals')
+
+if globals.python3_host_prog ~= "" then
+    vim.g.python3_host_prog = globals.python3_host_prog
 else
     local venv_path = '~/.venvs/neovim'
     vim.g.python3_host_prog = vim.fn.expand(venv_path .. '/bin/python3')

@@ -1,4 +1,4 @@
-local vimrc = vim.g.vimrc
+local globals = require('setup.globals')
 
 return {
     -- gruvbox theme
@@ -19,14 +19,14 @@ return {
     -- nerdcomment for easy commenting
     {
         'scrooloose/nerdcommenter',
-        enabled = not vimrc.disable_nerdcommenter,
+        enabled = not globals.disable_nerdcommenter,
         config = function() require('setup.nerdcommenter') end
     },
 
     -- Comment.nvim -- like nerdcommenter but in Lua
     {
         'numToStr/Comment.nvim',
-        enabled = not vimrc.disable_commentnvim,
+        enabled = not globals.disable_commentnvim,
         config = function() require('setup.comment') end
     },
 
@@ -70,14 +70,14 @@ return {
     -- clang-format intergration for vim
     {
         'rhysd/vim-clang-format',
-        enabled = not vimrc.disable_clang_format,
+        enabled = not globals.disable_clang_format,
         config = function() require('setup.clang-format') end
     },
 
     -- LSP configurations for neovim
     {
         'neovim/nvim-lspconfig',
-        enabled = not vimrc.disable_lsp,
+        enabled = not globals.disable_lsp,
         config = function() require('setup.lsp') end,
         dependencies = {
             'williamboman/mason.nvim',
@@ -91,7 +91,7 @@ return {
     -- live parameter hints
     {
         'ray-x/lsp_signature.nvim',
-        enabled = not vimrc.disable_lsp_signature,
+        enabled = not globals.disable_lsp_signature,
         config = function()
             require 'lsp_signature'.setup({
                 floating_window = true, -- show signature in floating window
@@ -106,7 +106,7 @@ return {
     -- nvim-cmp for autocompletion
     {
         'hrsh7th/nvim-cmp',
-        enabled = not vimrc.disable_nvim_cmp,
+        enabled = not globals.disable_nvim_cmp,
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'L3MON4D3/LuaSnip' },         -- snippet plugin
@@ -124,7 +124,7 @@ return {
     -- treesitter
     {
         'nvim-treesitter/nvim-treesitter',
-        enabled = not vimrc.disable_treesitter,
+        enabled = not globals.disable_treesitter,
         build = ':TSUpdate',
         config = function() require('setup.treesitter') end
     },
@@ -170,7 +170,7 @@ return {
     -- Telescope -- modular fuzzy finder
     {
         'nvim-telescope/telescope.nvim',
-        enabled = not vimrc.disable_telescope,
+        enabled = not globals.disable_telescope,
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
