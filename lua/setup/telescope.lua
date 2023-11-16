@@ -23,9 +23,8 @@ map('n', '<leader>fk', builtin.keymaps, 'Keymaps')
 map('n', '<leader>fe', ":Telescope file_browser<CR>", 'File Browser')
 map('n', '<leader>fr', builtin.resume, 'Resume picker')
 
-map('n', '<C-Space>', telescope_project_files, 'Project files')
-map('n', '<M-p>', telescope_project_files, 'Project files')
-map('n', '<M-Space>', builtin.buffers, 'Buffers')
+map('n', '<C-p>', telescope_project_files, 'Project files')
+map('n', '<C-Space>', builtin.buffers, 'Buffers')
 
 map('n', '<leader>fF', function() builtin.find_files({ no_ignore = true }) end, 'Find files (all)')
 map('n', '<leader>fG', function() builtin.live_grep({ additional_args = { '--no-ignore' } }) end, 'Live grep (all)')
