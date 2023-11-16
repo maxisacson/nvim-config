@@ -128,6 +128,10 @@ return {
         build = ':TSUpdate',
         config = function() require('setup.treesitter') end
     },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        dependencies = 'nvim-treesitter'
+    },
 
     -- feline airline alternative
     {
