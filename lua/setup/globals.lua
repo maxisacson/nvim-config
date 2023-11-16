@@ -14,6 +14,8 @@ local M = {
     arduinolsp_cmd = 'arduino-language-server',
     arduinolsp_fqbn = 'arduino:avr:uno',
     arduinocli_config = vim.env['HOME'] .. '/.arduino15/arduino-cli.yaml',
+
+    cpp_guard_add_trailing_underline = true,
 }
 
 local merge

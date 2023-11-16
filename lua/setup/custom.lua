@@ -50,7 +50,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Function to insert include guards in cpp headers
 local insert_cpp_include_guard = function()
     local f = vim.fn
-    local guard = f.substitute(f.toupper(f.expand('%:t')), '\\.', '_', 'g') .. '_'
+    local guard = f.substitute(f.toupper(f.expand('%:t')), '\\.', '_', 'g')
+    if require('setup.globals').cpp_guard_add_trailing_underline == true then
+        guard = guard .. '_'
+    end
     vim.api.nvim_buf_set_lines(0, 0, 0, true, {
         '#ifndef ' .. guard,
         '#define ' .. guard,
