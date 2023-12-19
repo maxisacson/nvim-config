@@ -17,6 +17,7 @@ map('n', '<leader>ff', builtin.find_files, 'Find files')
 map('n', '<leader>fv', builtin.git_files, 'Git files')
 map('n', '<leader>fg', builtin.live_grep, 'Live grep')
 map('n', '<leader>fs', builtin.grep_string, 'Grep string')
+map('v', '<leader>fs', builtin.grep_string, 'Grep string')
 map('n', '<leader>fb', builtin.buffers, 'Buffers')
 map('n', '<leader>fh', builtin.help_tags, 'Help tags')
 map('n', '<leader>fk', builtin.keymaps, 'Keymaps')
@@ -29,6 +30,7 @@ map('n', '<C-Space>', builtin.buffers, 'Buffers')
 map('n', '<leader>fF', function() builtin.find_files({ no_ignore = true }) end, 'Find files (all)')
 map('n', '<leader>fG', function() builtin.live_grep({ additional_args = { '--no-ignore' } }) end, 'Live grep (all)')
 map('n', '<leader>fS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
+map('v', '<leader>fS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
 
 local fb_actions = require('telescope').extensions.file_browser.actions
 telescope.setup {
