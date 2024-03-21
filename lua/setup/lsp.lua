@@ -6,11 +6,7 @@ require('mason-lspconfig').setup({
         'clangd', 'pylsp', 'cmake', 'lua_ls', 'marksman'
     }
 })
-require('fidget').setup({
-    text = {
-        spinner = "dots",
-    }
-})
+require('fidget').setup({})
 
 require('neodev').setup({})
 local lspconfig = require('lspconfig')
