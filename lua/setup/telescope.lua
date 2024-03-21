@@ -21,7 +21,7 @@ map('v', '<leader>fs', builtin.grep_string, 'Grep string')
 map('n', '<leader>fb', builtin.buffers, 'Buffers')
 map('n', '<leader>fh', builtin.help_tags, 'Help tags')
 map('n', '<leader>fk', builtin.keymaps, 'Keymaps')
-map('n', '<leader>fe', ":Telescope file_browser<CR>", 'File Browser')
+map('n', '<leader>fe', telescope.extensions.file_browser.file_browser, 'File Browser')
 map('n', '<leader>fr', builtin.resume, 'Resume picker')
 
 map('n', '<C-p>', telescope_project_files, 'Project files')
@@ -31,6 +31,7 @@ map('n', '<leader>fF', function() builtin.find_files({ no_ignore = true }) end, 
 map('n', '<leader>fG', function() builtin.live_grep({ additional_args = { '--no-ignore' } }) end, 'Live grep (all)')
 map('n', '<leader>fS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
 map('v', '<leader>fS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
+map('n', '<leader>fE', function() telescope.extensions.file_browser.file_browser({ path = '%:p:h' }) end, 'File Browser (from current)')
 
 local fb_actions = require('telescope').extensions.file_browser.actions
 telescope.setup {
