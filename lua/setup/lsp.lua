@@ -41,6 +41,7 @@ local on_attach = function(client, bufnr)
     if telescope_ok then
         map('n', 'gr', telescope.lsp_references, 'Goto reference')
         map('n', 'gd', telescope.lsp_definitions, 'Goto definition')
+        map('n', 'gs', function() telescope.lsp_definitions({ jump_type = 'vsplit' }) end, 'Goto definition (vsplit)')
         map('n', '<space>D', telescope.lsp_type_definitions, 'Goto type definition')
         map('n', 'gi', telescope.lsp_implementations, 'Goto implementation')
         map('n', '<space>ds', telescope.lsp_document_symbols, 'List document symbols')
@@ -49,6 +50,7 @@ local on_attach = function(client, bufnr)
     else
         map('n', 'gr', vim.lsp.buf.references, 'Goto reference')
         map('n', 'gd', vim.lsp.buf.definition, 'Goto definition')
+        map('n', 'gs', ':vsplit | lua vim.lsp.buf.definition()<CR>', 'Goto definition (vsplit)')
         map('n', '<space>D', vim.lsp.buf.type_definition, 'Goto type definition')
         map('n', 'gi', vim.lsp.buf.implementation, 'Goto implementation')
         map('n', '<space>ds', vim.lsp.buf.document_symbol, 'List document symbols')
@@ -100,6 +102,7 @@ end
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
     signs = false,
+    underline = true,
     update_in_insert = true,
 })
 
