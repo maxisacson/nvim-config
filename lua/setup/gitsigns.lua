@@ -11,6 +11,7 @@ local on_attach = function(bufnr)
     map('n', '<leader>gu', gitsigns.undo_stage_hunk, bufnr, "Undo last stage hunk")
     map('n', '<leader>gS', gitsigns.stage_buffer, bufnr, "Stage all hunks in buffer")
     map('n', '<leader>gp', gitsigns.preview_hunk, bufnr, "Preview hunk")
+    map('n', '<leader>gr', gitsigns.reset_hunk, bufnr, "Reset hunk")
 
     map('n', ']c', gitsigns.next_hunk, bufnr, "Goto next hunk")
     map('n', '[c', gitsigns.prev_hunk, bufnr, "Goto next hunk")
