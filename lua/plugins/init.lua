@@ -236,5 +236,13 @@ return {
                 auto_session_suppress_dirs = { '~/', '/', "~/.config/*", "~/.local/*" },
             })
         end
-    }
+    },
+
+    -- Oil.nvim - edit the filesystem as a buffer
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+        config = function() require('setup.oil') end
+    },
 }
