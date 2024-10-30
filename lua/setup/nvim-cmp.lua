@@ -4,7 +4,7 @@ local luasnip = require 'luasnip'
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
-vim.o.completeopt = 'menu,menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noselect'
 
 cmp.setup({
     preselect = false,
@@ -18,28 +18,17 @@ cmp.setup({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<C-Space>'] = cmp.mapping.complete({}),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
-
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-l>'] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
-            else
-                fallback()
             end
         end, { 'i', 's' }),
-
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
+        ['<C-h>'] = cmp.mapping(function()
+            if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
-            else
-                fallback()
             end
         end, { 'i', 's' }),
-
     }),
     sources = cmp.config.sources(
         {
@@ -71,22 +60,7 @@ cmp.setup({
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
-    completion = { autocomplete = false },
-    mapping = cmp.mapping.preset.cmdline({
-        ['<Tab>'] = cmp.mapping(function()
-            if cmp.visible() then
-                cmp.select_next_item()
-            else
-                cmp.complete({})
-            end
-        end, { 'c' }),
-
-        ['<S-Tab>'] = cmp.mapping(function()
-            if cmp.visible() then
-                cmp.select_prev_item()
-            end
-        end, { 'c' }),
-    }),
+    mapping = cmp.mapping.preset.cmdline({}),
     sources = cmp.config.sources({
         { name = 'buffer' },
     })
@@ -95,24 +69,11 @@ cmp.setup.cmdline({ '/', '?' }, {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
     completion = { autocomplete = false },
-    mapping = cmp.mapping.preset.cmdline({
-        ['<Tab>'] = cmp.mapping(function()
-            if cmp.visible() then
-                cmp.select_next_item()
-            else
-                cmp.complete({})
-            end
-        end, { 'c' }),
-
-        ['<S-Tab>'] = cmp.mapping(function()
-            if cmp.visible() then
-                cmp.select_prev_item()
-            end
-        end, { 'c' }),
-    }),
+    mapping = cmp.mapping.preset.cmdline({}),
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
         { name = 'cmdline' },
-    })
+    }),
+    matching = { disallow_symbol_nonprefix_matching = false },
 })
