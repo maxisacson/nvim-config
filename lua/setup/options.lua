@@ -2,13 +2,13 @@ local opt = vim.opt
 local g = vim.g
 
 -- Set indenting stuff
-opt.tabstop = 4 -- number of spaces in a <Tab>
-opt.shiftwidth = 4 -- number of spaces to use for autoindent. Should be == tabstop
-opt.softtabstop = 4 -- number of spaces for <Tab> when editing
-opt.expandtab = true -- use spaces as <Tab>
-opt.smarttab = true -- insert shiftwidth worth of whitespace at beginning of line
+opt.tabstop = 4                    -- number of spaces in a <Tab>
+opt.shiftwidth = 4                 -- number of spaces to use for autoindent. Should be == tabstop
+opt.softtabstop = 4                -- number of spaces for <Tab> when editing
+opt.expandtab = true               -- use spaces as <Tab>
+opt.smarttab = true                -- insert shiftwidth worth of whitespace at beginning of line
 opt.backspace = 'indent,eol,start' -- make <BS> well behaved
-opt.autoindent = true -- make sure autoindent is turned on
+opt.autoindent = true              -- make sure autoindent is turned on
 opt.smartindent = true
 opt.cinoptions = 'l1,g0.75s,h0.25s,N-s'
 
@@ -53,8 +53,8 @@ opt.title = true
 -- Always use ft=tex as default for .tex-files
 g.tex_flavor = 'latex'
 
--- Map , to <Leader>
-g.mapleader = ','
+-- Map <Space> to <Leader>
+g.mapleader = ' '
 
 -- always split the screen to the right or below
 opt.splitright = true

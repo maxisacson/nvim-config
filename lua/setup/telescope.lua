@@ -13,25 +13,26 @@ local map = function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { silent = true, desc = '[Telescope] ' .. desc })
 end
 
-map('n', '<leader>ff', builtin.find_files, 'Find files')
-map('n', '<leader>fv', builtin.git_files, 'Git files')
-map('n', '<leader>fg', builtin.live_grep, 'Live grep')
-map('n', '<leader>fs', builtin.grep_string, 'Grep string')
-map('v', '<leader>fs', builtin.grep_string, 'Grep string')
-map('n', '<leader>fb', builtin.buffers, 'Buffers')
-map('n', '<leader>fh', builtin.help_tags, 'Help tags')
-map('n', '<leader>fk', builtin.keymaps, 'Keymaps')
-map('n', '<leader>fe', telescope.extensions.file_browser.file_browser, 'File Browser')
-map('n', '<leader>fr', builtin.resume, 'Resume picker')
+map('n', '<leader>sf', builtin.find_files, 'Find files')
+map('n', '<leader>sv', builtin.git_files, 'Git files')
+map('n', '<leader>sg', builtin.live_grep, 'Live grep')
+map('n', '<leader>ss', builtin.grep_string, 'Grep string')
+map('v', '<leader>ss', builtin.grep_string, 'Grep string')
+map('n', '<leader>sb', builtin.buffers, 'Buffers')
+map('n', '<leader>sh', builtin.help_tags, 'Help tags')
+map('n', '<leader>sk', builtin.keymaps, 'Keymaps')
+map('n', '<leader>se', telescope.extensions.file_browser.file_browser, 'File Browser')
+map('n', '<leader>sr', builtin.resume, 'Resume picker')
 
 map('n', '<C-p>', telescope_project_files, 'Project files')
 map('n', '<C-Space>', builtin.buffers, 'Buffers')
 
-map('n', '<leader>fF', function() builtin.find_files({ no_ignore = true }) end, 'Find files (all)')
-map('n', '<leader>fG', function() builtin.live_grep({ additional_args = { '--no-ignore' } }) end, 'Live grep (all)')
-map('n', '<leader>fS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
-map('v', '<leader>fS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
-map('n', '<leader>fE', function() telescope.extensions.file_browser.file_browser({ path = '%:p:h' }) end, 'File Browser (from current)')
+map('n', '<leader>sF', function() builtin.find_files({ no_ignore = true }) end, 'Find files (all)')
+map('n', '<leader>sG', function() builtin.live_grep({ additional_args = { '--no-ignore' } }) end, 'Live grep (all)')
+map('n', '<leader>sS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
+map('v', '<leader>sS', function() builtin.grep_string({ additional_args = { '--no-ignore' } }) end, 'Grep string (all)')
+map('n', '<leader>sE', function() telescope.extensions.file_browser.file_browser({ path = '%:p:h' }) end,
+    'File Browser (from current)')
 
 local fb_actions = require('telescope').extensions.file_browser.actions
 telescope.setup {

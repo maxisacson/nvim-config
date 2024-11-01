@@ -1,16 +1,16 @@
 -- config for Comment.nvim
 require('Comment').setup({
     toggler = {
-        line = '<Leader>c<Space>',
-        block = '<Leader>cb'
+        line = '<Leader>c',
+        block = '<Leader>bc'
     },
     opleader = {
-        line = '<Leader>c<Space>',
-        block = '<Leader>cb'
+        line = '<Leader>c',
+        block = '<Leader>bc'
     },
     extra = {
-        above = '<Leader>cO',
-        below = '<Leader>co',
-        eol = '<Leader>cA',
+        above = '<Leader>OC',
+        below = '<Leader>oc',
+        eol = '<Leader>C',
     }
 })

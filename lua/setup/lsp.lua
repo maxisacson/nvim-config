@@ -23,44 +23,43 @@ local on_attach = function(client, bufnr)
 
     map('n', 'gD', vim.lsp.buf.declaration, 'Goto declaration')
     map('n', 'K', vim.lsp.buf.hover, 'Hover')
-    map('n', '<space>sh', vim.lsp.buf.signature_help, 'Signature help')
-    map('n', '<space>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
-    map('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
-    map('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
+    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
+    map('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
         'List workspace folders')
-    map('n', '<space>rn', vim.lsp.buf.rename, 'Rename symbol')
-    map('n', '<space>e', vim.diagnostic.open_float, 'Open diagnostics under cursor')
+    map('n', '<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
+    map('n', '<leader>e', vim.diagnostic.open_float, 'Open diagnostics under cursor')
     map('n', '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic')
     map('n', ']d', vim.diagnostic.goto_next, 'Goto next diagnostic')
-    map('n', '<space>a', vim.lsp.buf.code_action, 'Code action')
+    map('n', '<leader>a', vim.lsp.buf.code_action, 'Code action')
 
     if telescope_ok then
         map('n', 'gr', telescope.lsp_references, 'Goto reference')
         map('n', 'gd', telescope.lsp_definitions, 'Goto definition')
         map('n', 'gs', function() telescope.lsp_definitions({ jump_type = 'vsplit' }) end, 'Goto definition (vsplit)')
-        map('n', '<space>D', telescope.lsp_type_definitions, 'Goto type definition')
+        map('n', '<leader>D', telescope.lsp_type_definitions, 'Goto type definition')
         map('n', 'gi', telescope.lsp_implementations, 'Goto implementation')
-        map('n', '<space>ds', telescope.lsp_document_symbols, 'List document symbols')
-        map('n', '<space>ws', telescope.lsp_dynamic_workspace_symbols, 'List workspace symbols')
-        map('n', '<space>q', telescope.diagnostics, 'Open diagnostics')
+        map('n', '<leader>ds', telescope.lsp_document_symbols, 'List document symbols')
+        map('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'List workspace symbols')
+        map('n', '<leader>q', telescope.diagnostics, 'Open diagnostics')
     else
         map('n', 'gr', vim.lsp.buf.references, 'Goto reference')
         map('n', 'gd', vim.lsp.buf.definition, 'Goto definition')
         map('n', 'gs', ':vsplit | lua vim.lsp.buf.definition()<CR>', 'Goto definition (vsplit)')
-        map('n', '<space>D', vim.lsp.buf.type_definition, 'Goto type definition')
+        map('n', '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition')
         map('n', 'gi', vim.lsp.buf.implementation, 'Goto implementation')
-        map('n', '<space>ds', vim.lsp.buf.document_symbol, 'List document symbols')
-        map('n', '<space>ws', vim.lsp.buf.workspace_symbol, 'List workspace symbols')
-        map('n', '<space>q', vim.diagnostic.setloclist, 'Open diagnostics')
+        map('n', '<leader>ds', vim.lsp.buf.document_symbol, 'List document symbols')
+        map('n', '<leader>ws', vim.lsp.buf.workspace_symbol, 'List workspace symbols')
+        map('n', '<leader>q', vim.diagnostic.setloclist, 'Open diagnostics')
     end
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.documentFormattingProvider then
-        map('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format document')
+        map('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end, 'Format document')
     end
 
     if client.server_capabilities.documentRangeFormattingProvider then
-        map('v', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format selection')
+        map('v', '<leader>f', function() vim.lsp.buf.format({ async = true }) end, 'Format selection')
     end
 
     local hi = function(...)
@@ -73,9 +72,9 @@ local on_attach = function(client, bufnr)
     hi('LspDiagnosticsUnderlineWarning', { undercurl = 1, sp = 'Orange' })
     hi('LspDiagnosticsUnderlineInformation', { undercurl = 1, sp = 'LightBlue' })
     hi('LspDiagnosticsUnderlineHint', { undercurl = 1, sp = 'LightGrey' })
-    hi('LspReferenceRead', { bg=bg('Visual') })
-    hi('LspReferenceWrite', { bg=bg('Visual') })
-    hi('LspReferenceText', { bg=bg('Visual') })
+    hi('LspReferenceRead', { bg = bg('Visual') })
+    hi('LspReferenceWrite', { bg = bg('Visual') })
+    hi('LspReferenceText', { bg = bg('Visual') })
 
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
@@ -97,10 +96,10 @@ end
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-    signs = false,
-    underline = true,
-    update_in_insert = true,
-})
+        signs = false,
+        underline = true,
+        update_in_insert = true,
+    })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 

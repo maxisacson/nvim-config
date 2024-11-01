@@ -23,30 +23,30 @@ map('n', '<Leader><', '<C-w>5<')
 -- Buffer management
 map('n', '<Leader><Leader>', '<C-^>')
 
--- mappings for quickfix list apart from tab
-map('n', '<Leader>qn', ':cnext<CR>')
-map('n', '<Leader>qp', ':cprev<CR>')
-map('n', '<Leader>qf', ':cfirst<CR>')
-map('n', '<Leader>ql', ':clast<CR>')
+-- mappings for quickfix list
+map('n', '<M-n>', ':cnext<CR>')
+map('n', '<M-p>', ':cprev<CR>')
+map('n', '<M-N>', ':clast<CR>')
+map('n', '<M-P>', ':cfirst<CR>')
 map('n', '<Leader>qc', ':cclose<CR>')
 map('n', '<Leader>qo', ':copen<CR>')
 
--- mappings for location list apart from tab
-map('n', '<Leader>ln', ':lnext<CR>')
-map('n', '<Leader>lp', ':lprev<CR>')
-map('n', '<Leader>lf', ':lfirst<CR>')
-map('n', '<Leader>ll', ':llast<CR>')
+-- mappings for location list
+map('n', ']l', ':lnext<CR>')
+map('n', '[l', ':lprev<CR>')
+map('n', ']L', ':llast<CR>')
+map('n', '[L', ':lfirst<CR>')
 map('n', '<Leader>lc', ':lclose<CR>')
 map('n', '<Leader>lo', ':lopen<CR>')
 
 -- command line editing
-map('c', '<C-a>', '<Home>') -- start of line
-map('c', '<C-e>', '<End>') -- end of line
-map('c', '<C-f>', '<Right>') -- forward one character
-map('c', '<C-b>', '<Left>') -- back one character
-map('c', '<C-d>', '<Del>') -- delete character under cursor
-map('c', '<A-b>', '<S-Left>') -- back one word
-map('c', '<A-f>', '<S-Right>') -- forward one word
+map('c', '<C-a>', '<Home>')    -- start of line
+map('c', '<C-e>', '<End>')     -- end of line
+map('c', '<C-f>', '<Right>')   -- forward one character
+map('c', '<C-b>', '<Left>')    -- back one character
+map('c', '<C-d>', '<Del>')     -- delete character under cursor
+map('c', '<M-b>', '<S-Left>')  -- back one word
+map('c', '<M-f>', '<S-Right>') -- forward one word
 
 -- move selected line/block down/up/right/left
 map('v', 'J', ":m '>+1<CR>gv=gv")
