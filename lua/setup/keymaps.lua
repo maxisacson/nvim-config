@@ -53,3 +53,8 @@ map('v', 'J', ":m '>+1<CR>gv=gv")
 map('v', 'K', ":m '<-2<CR>gv=gv")
 map('v', '>', ">gv")
 map('v', '<', "<gv")
+
+-- copy and paste to system clipboard (Ctrl-C / Ctrl-V)
+map('v', '<Leader>y', '"+y')
+map('n', '<Leader>y', '"+yy')
+map('n', '<Leader>p', '"+p')
