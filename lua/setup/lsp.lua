@@ -3,7 +3,7 @@ local globals = require('setup.globals')
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
-        'clangd', 'pylsp', 'cmake', 'lua_ls', 'marksman'
+        'pylsp', 'cmake', 'lua_ls', 'marksman'
     }
 })
 require('fidget').setup({})
