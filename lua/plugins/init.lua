@@ -244,4 +244,12 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function() require('setup.oil') end
     },
+
+    -- fancy notifications
+    {
+        'rcarriga/nvim-notify',
+        config = function()
+            vim.notify = require('notify')
+        end
+    },
 }
