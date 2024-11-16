@@ -133,17 +133,26 @@ return {
         dependencies = 'nvim-treesitter'
     },
 
-    -- feline airline alternative
     {
-        'freddiehaddad/feline.nvim',
-        dependencies = {
-            { 'nvim-tree/nvim-web-devicons' },
-            {
-                'lewis6991/gitsigns.nvim',
-                config = function() require('setup.gitsigns') end
-            }
-        },
-        config = function() require('setup.feline') end
+        'lewis6991/gitsigns.nvim',
+        config = function() require('setup.gitsigns') end
+    },
+    -- feline airline alternative
+    -- {
+    --     'freddiehaddad/feline.nvim',
+    --     dependencies = {
+    --         { 'nvim-tree/nvim-web-devicons' },
+    --         {
+    --             'lewis6991/gitsigns.nvim',
+    --             config = function() require('setup.gitsigns') end
+    --         }
+    --     },
+    --     config = function() require('setup.feline') end
+    -- },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function() require('setup.lualine') end
     },
 
     -- tabline plugin
