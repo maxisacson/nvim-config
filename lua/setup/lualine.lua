@@ -20,6 +20,9 @@ end
 
 local function file_format_and_encoding()
     local encoding = vim.opt.fileencoding:get()
+    if encoding == '' then
+        encoding = vim.opt.encoding:get()
+    end
     local format = vim.opt.fileformat:get()
     return string.format('%s[%s]', encoding, format)
 end
