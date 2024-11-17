@@ -6,17 +6,6 @@ local function lsp_client_names()
     return table.concat(clients, ' ')
 end
 
-local function file_format()
-    local ff = vim.bo.fileformat
-    if ff == '' then
-        ff = vim.o.fileformat
-    end
-    if ff ~= '' then
-        ff = '[' .. ff .. ']'
-    end
-    return ff
-end
-
 local function git_diff()
     local status = vim.b.gitsigns_status_dict
     if status == nil then
@@ -29,12 +18,10 @@ local function git_diff()
     }
 end
 
-local function file_location()
-    local line = vim.fn.line('.')
-    local lines = vim.fn.line('$')
-    local col = vim.fn.col('.')
-    local percent = vim.fn.round(100 * line / lines)
-    return string.format('%d%%%% %d ☰ %d:%d', percent, lines, line, col)
+local function file_format_and_encoding()
+    local encoding = vim.opt.fileencoding:get()
+    local format = vim.opt.fileformat:get()
+    return string.format('%s[%s]', encoding, format)
 end
 
 local function get_theme()
@@ -71,9 +58,13 @@ require('lualine').setup(
             ignore_focus = { 'fugitive', 'fugitiveblame', 'NvimTree' },
         },
         sections = {
-            lualine_a = { 'mode' },
+            lualine_a = {
+                'mode'
+            },
             lualine_b = {
-                { 'branch', icon = '' },
+                {
+                    'branch', icon = ''
+                },
                 {
                     'diff',
                     source = git_diff,
@@ -82,18 +73,22 @@ require('lualine').setup(
             },
             lualine_c = {
                 {
-                    'filetype',
-                    icon_only = true,
-                    padding = { left = 1, right = 0 }
-                },
-                {
                     'filename',
-                    padding = { left = 0, right = 1 }
+                    symbols = {
+                        modified = '●',
+                        readonly = '🔒',
+                    }
                 }
             },
             lualine_x = {
-                { 'diagnostics', padding = 0 },
-                'bo:filetype',
+                {
+                    'diagnostics',
+                    padding = 0,
+                    update_in_insert = true
+                },
+                {
+                    'filetype'
+                },
                 {
                     lsp_client_names,
                     icon = '',
@@ -101,17 +96,13 @@ require('lualine').setup(
                 }
             },
             lualine_y = {
-                {
-                    'encoding',
-                    padding = { left = 1, right = 0, }
-                },
-                {
-                    file_format,
-                    padding = { left = 0, right = 1, }
-                },
+                file_format_and_encoding
             },
             lualine_z = {
-                { file_location, color = { gui = nil } },
+                {
+                    '%p%% %L ☰ %l:%c',
+                    color = { gui = nil }
+                },
             },
         }
     }
