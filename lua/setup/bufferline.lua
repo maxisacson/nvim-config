@@ -1,23 +1,101 @@
 local fg = require('setup.utils').fg
 
-local bg0    = fg("GruvboxBg0")
-local bg1    = fg("GruvboxBg1")
-local bg2    = fg("GruvboxBg2")
-local bg4    = fg("GruvboxBg4")
-local fg1    = fg("GruvboxFg1")
-local fg4    = fg("GruvboxFg4")
-local red    = fg("GruvboxRed")
-local orange = fg("GruvboxOrange")
-local blue   = fg("GruvboxBlue")
-local yellow = fg("GruvboxYellow")
-local purple = fg("GruvboxPurple")
-local aqua   = fg("GruvboxAqua")
-local green  = fg("GruvboxGreen")
-local gray   = fg("GruvboxGray")
+local function get_highlights()
+    if vim.g.colors_name == 'gruvbox' then
+        local bg0    = fg("GruvboxBg0")
+        local bg1    = fg("GruvboxBg1")
+        local bg2    = fg("GruvboxBg2")
+        local bg4    = fg("GruvboxBg4")
+        local fg1    = fg("GruvboxFg1")
+        local fg4    = fg("GruvboxFg4")
+        local red    = fg("GruvboxRed")
+        local orange = fg("GruvboxOrange")
+        local blue   = fg("GruvboxBlue")
+        local yellow = fg("GruvboxYellow")
+        local purple = fg("GruvboxPurple")
+        local aqua   = fg("GruvboxAqua")
+        local green  = fg("GruvboxGreen")
+        local gray   = fg("GruvboxGray")
+
+        return {
+            fill = {
+                fg = fg4,
+                bg = bg1,
+            },
+            background = {
+                fg = bg4,
+                bg = bg1,
+            },
+            buffer_visible = {
+                fg = blue,
+                bg = bg1,
+            },
+            buffer_selected = {
+                fg = fg1,
+                bg = bg2,
+                bold = true,
+                italic = false,
+            },
+            numbers = {
+                fg = bg4,
+                bg = bg1,
+            },
+            numbers_visible = {
+                fg = blue,
+                bg = bg1,
+            },
+            numbers_selected = {
+                fg = fg4,
+                bg = bg2,
+                bold = true,
+                italic = false,
+            },
+            modified = {
+                fg = yellow,
+                bg = bg1,
+            },
+            modified_visible = {
+                fg = yellow,
+                bg = bg1,
+            },
+            modified_selected = {
+                fg = yellow,
+                bg = bg2,
+            },
+            indicator_selected = {
+                fg = bg2,
+                bg = bg2,
+            },
+            indicator_visible = {
+                fg = bg1,
+                bg = bg1,
+            },
+            duplicate = {
+                fg = bg4,
+                bg = bg1,
+                italic = false,
+            },
+            duplicate_visible = {
+                fg = blue,
+                bg = bg1,
+                italic = false,
+            },
+            duplicate_selected = {
+                fg = fg1,
+                bg = bg2,
+                bold = true,
+                italic = false,
+            },
+        }
+    end
+
+    return {}
+end
 
 require('bufferline').setup({
     options = {
         numbers = function(opts) return string.format('%s', opts.ordinal) end,
+        show_buffer_icons = false,
         show_buffer_close_icons = false,
         show_close_icon = false,
         indicator = {
@@ -41,76 +119,7 @@ require('bufferline').setup({
         right_mouse_command = nil,
         max_name_length = 32,
     },
-    highlights = {
-        fill = {
-            fg = fg4,
-            bg = bg1,
-        },
-        background = {
-            fg = bg4,
-            bg = bg1,
-        },
-        buffer_visible = {
-            fg = blue,
-            bg = bg1,
-        },
-        buffer_selected = {
-            fg = fg1,
-            bg = bg2,
-            bold = true,
-            italic = false,
-        },
-        numbers = {
-            fg = bg4,
-            bg = bg1,
-        },
-        numbers_visible = {
-            fg = blue,
-            bg = bg1,
-        },
-        numbers_selected = {
-            fg = fg4,
-            bg = bg2,
-            bold = true,
-            italic = false,
-        },
-        modified = {
-            fg = yellow,
-            bg = bg1,
-        },
-        modified_visible = {
-            fg = yellow,
-            bg = bg1,
-        },
-        modified_selected = {
-            fg = yellow,
-            bg = bg2,
-        },
-        indicator_selected = {
-            fg = bg2,
-            bg = bg2,
-        },
-        indicator_visible = {
-            fg = bg1,
-            bg = bg1,
-        },
-        duplicate = {
-            fg = bg4,
-            bg = bg1,
-            italic = false,
-        },
-        duplicate_visible = {
-            fg = blue,
-            bg = bg1,
-            italic = false,
-        },
-        duplicate_selected = {
-            fg = fg1,
-            bg = bg2,
-            bold = true,
-            italic = false,
-        },
-    }
+    highlights = get_highlights()
 })
 
 local function nmap(lhs, rhs, desc)
