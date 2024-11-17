@@ -141,7 +141,10 @@ return {
     -- status bar plugin
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons', 'lewis6991/gitsigns' },
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'lewis6991/gitsigns.nvim'
+        },
         config = function() require('setup.lualine') end
     },
 
