@@ -137,21 +137,11 @@ return {
         'lewis6991/gitsigns.nvim',
         config = function() require('setup.gitsigns') end
     },
-    -- feline airline alternative
-    -- {
-    --     'freddiehaddad/feline.nvim',
-    --     dependencies = {
-    --         { 'nvim-tree/nvim-web-devicons' },
-    --         {
-    --             'lewis6991/gitsigns.nvim',
-    --             -- config = function() require('setup.gitsigns') end
-    --         }
-    --     },
-    --     config = function() require('setup.feline') end
-    -- },
+
+    -- status bar plugin
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons', 'lewis6991/gitsigns' },
         config = function() require('setup.lualine') end
     },
 
