@@ -27,6 +27,19 @@ local function file_format_and_encoding()
     return string.format('%s[%s]', encoding, format)
 end
 
+local function caps_lock_status()
+    local output = vim.system({ 'xset', '-q' }, { text = true }):wait().stdout
+    if output == nil then
+        return ''
+    end
+
+    if output:match("Caps Lock:%s+(%S+)") == 'on' then
+        return "[󰌎]"
+    end
+
+    return ''
+end
+
 local function get_theme()
     if vim.g.colors_name == 'gruvbox' then
         local theme = require('lualine.themes.gruvbox')
@@ -84,6 +97,9 @@ require('lualine').setup(
                 }
             },
             lualine_x = {
+                {
+                    caps_lock_status
+                },
                 {
                     'diagnostics',
                     padding = 0,
