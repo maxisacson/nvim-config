@@ -10,8 +10,6 @@ local function inner_callback(obj)
             local s = lines[2]
             if string.match(s, "Your branch is up to date with") == nil then
                 vim.notify(s, vim.log.levels.WARN, { title = M.title })
-            else
-                vim.notify("Your nvim config is up to date", vim.log.levels.INFO, { title = M.title })
             end
         end
     end
