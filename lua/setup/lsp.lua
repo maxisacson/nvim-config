@@ -104,7 +104,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Servers that don't require special setup
-local servers = { 'cmake', 'ts_ls', 'gopls', 'marksman', 'zls' }
+local servers = { 'cmake', 'ts_ls', 'gopls', 'marksman' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
@@ -211,5 +211,15 @@ lspconfig.arduino_language_server.setup {
         globals.arduinolsp_cmd,
         '-cli-config', globals.arduinocli_config,
         '-fqbn', globals.arduinolsp_fqbn
+    }
+}
+
+lspconfig.zls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        zls = {
+            enable_build_on_save = true,
+        }
     }
 }
