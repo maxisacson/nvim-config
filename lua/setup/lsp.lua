@@ -7,11 +7,21 @@ require('mason-lspconfig').setup({
     }
 })
 require('fidget').setup({})
-
 require('neodev').setup({})
-local lspconfig = require('lspconfig')
 
+local lspconfig = require('lspconfig')
 local telescope_ok, telescope = pcall(require, 'telescope.builtin')
+
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '󰅚 ',
+            [vim.diagnostic.severity.WARN] = '󰀪 ',
+            [vim.diagnostic.severity.INFO] = '󰋽 ',
+            [vim.diagnostic.severity.HINT] = '󰌶 ',
+        }
+    }
+})
 
 local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -96,7 +106,7 @@ end
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-        signs = false,
+        signs = true,
         underline = true,
         update_in_insert = true,
     })
