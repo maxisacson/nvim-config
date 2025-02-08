@@ -91,10 +91,6 @@ require('lualine').setup(
                 {
                     'filename',
                     path = 1,
-                    symbols = {
-                        modified = '●',
-                        readonly = '🔒',
-                    }
                 }
             },
             lualine_x = {
