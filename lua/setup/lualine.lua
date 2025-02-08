@@ -119,7 +119,7 @@ require('lualine').setup(
             },
             lualine_z = {
                 {
-                    '%p%% %L ☰ %l:%c',
+                    '%p%% %LL %l:%c',
                     color = { gui = nil }
                 },
             },
