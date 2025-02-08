@@ -8,7 +8,13 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            require('gruvbox').setup {}
+            require('gruvbox').setup {
+                overrides = {
+                    GitSignsAdd = { link = 'GruvboxGreenSign' },
+                    GitSignsChange = { link = 'GruvboxOrangeSign' },
+                    GitSignsDelete = { link = 'GruvboxRedSign' },
+                }
+            }
             vim.cmd [[colorscheme gruvbox]]
         end
     },

@@ -24,9 +24,3 @@ gitsigns.setup {
     },
     on_attach = on_attach
 }
-
-if vim.g.colors_name == 'gruvbox' then
-    vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'GruvboxGreenSign' })
-    vim.api.nvim_set_hl(0, 'GitSignsChange', { link = 'GruvboxOrangeSign' })
-    vim.api.nvim_set_hl(0, 'GitSignsDelete', { link = 'GruvboxRedSign' })
-end
