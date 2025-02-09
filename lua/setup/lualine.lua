@@ -107,7 +107,7 @@ require('lualine').setup(
                 },
                 {
                     lsp_client_names,
-                    icon = '',
+                    icon='',
                     padding = { left = 0, right = 1 }
                 }
             },
