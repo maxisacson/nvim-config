@@ -29,6 +29,9 @@ opt.guicursor = ""
 -- Set incremental search
 opt.incsearch = true
 
+-- Show substitutions in split
+opt.inccommand = 'split'
+
 -- Disable hlsearch
 opt.hlsearch = false
 
