@@ -51,7 +51,12 @@ local on_attach = function(client, bufnr)
         map('n', 'gi', telescope.lsp_implementations, 'Goto implementation')
         map('n', '<leader>ds', telescope.lsp_document_symbols, 'List document symbols')
         map('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'List workspace symbols')
-        map('n', '<leader>q', telescope.diagnostics, 'Open diagnostics')
+        map('n', '<leader>dq', function() telescope.diagnostics({ bufnr = 0 }) end, 'Open document diagnostics')
+        map('n', '<leader>wq', telescope.diagnostics, 'Open workspace diagnostics')
+        map('n', '<leader>dQ', function() telescope.diagnostics({ bufnr = 0, severity = "error" }) end,
+            'Open document diagnostics (errors)')
+        map('n', '<leader>wQ', function() telescope.diagnostics({ severity = "error" }) end,
+            'Open document diagnostics (errors)')
     else
         map('n', 'gr', vim.lsp.buf.references, 'Goto reference')
         map('n', 'gd', vim.lsp.buf.definition, 'Goto definition')
@@ -60,7 +65,8 @@ local on_attach = function(client, bufnr)
         map('n', 'gi', vim.lsp.buf.implementation, 'Goto implementation')
         map('n', '<leader>ds', vim.lsp.buf.document_symbol, 'List document symbols')
         map('n', '<leader>ws', vim.lsp.buf.workspace_symbol, 'List workspace symbols')
-        map('n', '<leader>q', vim.diagnostic.setloclist, 'Open diagnostics')
+        map('n', '<leader>dq', vim.diagnostic.setqflist, 'Open diagnostics')
+        map('n', '<leader>wq', vim.diagnostic.setqflist, 'Open diagnostics')
     end
 
     -- Set some keybinds conditional on server capabilities
