@@ -12,8 +12,8 @@ local on_attach = function(bufnr)
     map('n', '<leader>gp', gitsigns.preview_hunk, bufnr, "Preview hunk")
     map('n', '<leader>gr', gitsigns.reset_hunk, bufnr, "Reset hunk")
 
-    map('n', ']c', gitsigns.nav_hunk('next'), bufnr, "Goto next hunk")
-    map('n', '[c', gitsigns.nav_hunk('prev'), bufnr, "Goto next hunk")
+    map('n', ']c', function() gitsigns.nav_hunk('next') end, bufnr, "Goto next hunk")
+    map('n', '[c', function() gitsigns.nav_hunk('prev') end, bufnr, "Goto next hunk")
 end
 
 gitsigns.setup {
