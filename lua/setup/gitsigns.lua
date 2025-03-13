@@ -7,14 +7,13 @@ end
 local on_attach = function(bufnr)
     map('n', '<leader>gl', function() gitsigns.blame_line({ full = true }) end, bufnr, "Blame current line")
     map('n', '<leader>gb', gitsigns.toggle_current_line_blame, bufnr, "Toggle line blame")
-    map('n', '<leader>gs', gitsigns.stage_hunk, bufnr, "Stage hunk under cursor")
-    map('n', '<leader>gu', gitsigns.undo_stage_hunk, bufnr, "Undo last stage hunk")
+    map('n', '<leader>gs', gitsigns.stage_hunk, bufnr, "Stage/unstage hunk under cursor")
     map('n', '<leader>gS', gitsigns.stage_buffer, bufnr, "Stage all hunks in buffer")
     map('n', '<leader>gp', gitsigns.preview_hunk, bufnr, "Preview hunk")
     map('n', '<leader>gr', gitsigns.reset_hunk, bufnr, "Reset hunk")
 
-    map('n', ']c', gitsigns.next_hunk, bufnr, "Goto next hunk")
-    map('n', '[c', gitsigns.prev_hunk, bufnr, "Goto next hunk")
+    map('n', ']c', gitsigns.nav_hunk('next'), bufnr, "Goto next hunk")
+    map('n', '[c', gitsigns.nav_hunk('prev'), bufnr, "Goto next hunk")
 end
 
 gitsigns.setup {
