@@ -39,9 +39,13 @@ local on_attach = function(client, bufnr)
         'List workspace folders')
     map('n', '<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
     map('n', '<leader>e', vim.diagnostic.open_float, 'Open diagnostics under cursor')
-    map('n', '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic')
-    map('n', ']d', vim.diagnostic.goto_next, 'Goto next diagnostic')
+    map('n', '[d', function() vim.diagnostic.jump({count=-1, float=true}) end, 'Goto prev diagnostic')
+    map('n', ']d', function() vim.diagnostic.jump({count=1, float=true}) end, 'Goto next diagnostic')
     map('n', '<leader>a', vim.lsp.buf.code_action, 'Code action')
+    map('n', 'gK', function()
+        local opt = vim.diagnostic.config().virtual_lines
+        vim.diagnostic.config({ virtual_lines = not opt })
+    end, 'Toggle diagnostic virtual lines')
 
     if telescope_ok then
         map('n', 'gr', telescope.lsp_references, 'Goto reference')
@@ -92,30 +96,31 @@ local on_attach = function(client, bufnr)
     hi('LspReferenceWrite', { bg = bg('Visual') })
     hi('LspReferenceText', { bg = bg('Visual') })
 
+    vim.opt.updatetime = 250
+
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
-        vim.opt.updatetime = 250
 
         local g = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
         vim.api.nvim_create_autocmd('CursorHold',
             { group = g, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
         vim.api.nvim_create_autocmd('CursorMoved', { group = g, buffer = bufnr, callback = vim.lsp.buf.clear_references })
-        vim.api.nvim_create_autocmd('CursorHold', {
-            group = g,
-            buffer = bufnr,
-            callback = function()
-                vim.diagnostic.open_float({ show_header = false, focusable = false })
-            end
-        })
     end
-end
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
+    vim.api.nvim_create_autocmd('CursorHold', {
+        group = vim.api.nvim_create_augroup("LspDiagnosticHover", { clear = true }),
+        buffer = bufnr,
+        callback = function()
+            vim.diagnostic.open_float({ show_header = false, focusable = false })
+        end
+    })
+
+    vim.diagnostic.config({
         signs = true,
         underline = true,
         update_in_insert = true,
-    })
+    }, vim.lsp.diagnostic.get_namespace(client.id))
+end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
