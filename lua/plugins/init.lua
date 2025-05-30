@@ -86,8 +86,8 @@ return {
         enabled = not globals.disable_lsp,
         config = function() require('setup.lsp') end,
         dependencies = {
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
+            'mason-org/mason.nvim',
+            'mason-org/mason-lspconfig.nvim',
             'j-hui/fidget.nvim',     -- lsp status spinner
             'folke/lsp-colors.nvim', -- better support for lsp colors
         }
