@@ -153,13 +153,6 @@ setup('pylsp', {
     },
 })
 
--- require('rust-tools').setup {
---     server = {
---         on_attach = on_attach,
---         capabilities = capabilities
---     }
--- }
-
 setup('clangd', {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -190,33 +183,6 @@ setup('clangd', {
         "-modernize-use-trailing-return-type," ..
         "'" }
 })
-
--- local runtime_path = vim.split(package.path, ';')
--- table.insert(runtime_path, 'lua/?.lua')
--- table.insert(runtime_path, 'lua/?/init.lua')
-
--- lspconfig.lua_ls.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     settings = {
---         Lua = {
---             runtime = {
---                 version = "LuaJIT",
---                 path = runtime_path
---             },
---             diagnostics = {
---                 globals = { 'vim' }
---             },
---             workspace = {
---                 library = vim.api.nvim_get_runtime_file('', true),
---                 checkThirdParty = false,
---             },
---             telemetry = {
---                 enable = false
---             }
---         }
---     }
--- }
 
 setup('lua_ls', {
     on_attach = on_attach,
