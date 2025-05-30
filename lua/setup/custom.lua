@@ -101,7 +101,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     pattern = "*",
     callback = function()
         local spaces = vim.opt.tabstop:get()
-        vim.opt.listchars:append({ leadmultispace = '┆' .. string.rep(' ', spaces-1)})
+        vim.opt_local.listchars:append({ leadmultispace = '┆' .. string.rep(' ', spaces-1)})
     end,
     desc = 'Show whitespace when entering insert mode'
 })
@@ -109,7 +109,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     group = ag_whitespace,
     pattern = "*",
     callback = function()
-        vim.opt.listchars:remove('leadmultispace')
+        vim.opt_local.listchars:remove('leadmultispace')
     end,
     desc = 'Hide whitespace when entering insert mode'
 })
