@@ -7,9 +7,8 @@ require('mason-lspconfig').setup({
     }
 })
 require('fidget').setup({})
-require('neodev').setup({})
 
-local lspconfig = require('lspconfig')
+require('lspconfig') -- I don't think this is needed anymore
 local telescope_ok, telescope = pcall(require, 'telescope.builtin')
 
 vim.diagnostic.config({
@@ -124,20 +123,25 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local setup = function(lsp, cfg)
+    vim.lsp.config(lsp, cfg)
+    vim.lsp.enable(lsp)
+end
+
 -- Servers that don't require special setup
 local servers = { 'cmake', 'ts_ls', 'gopls', 'marksman' }
 for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
+    setup(lsp, {
         on_attach = on_attach,
         capabilities = capabilities
-    }
+    })
 end
 
 -- Servers that do require special setup
 
 -- NOTE: To install pylsp-mypy run
 --          :PylspInstall pylsp-mypy
-lspconfig.pylsp.setup {
+setup('pylsp', {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -147,7 +151,7 @@ lspconfig.pylsp.setup {
             }
         }
     },
-}
+})
 
 -- require('rust-tools').setup {
 --     server = {
@@ -156,7 +160,7 @@ lspconfig.pylsp.setup {
 --     }
 -- }
 
-lspconfig.clangd.setup {
+setup('clangd', {
     on_attach = on_attach,
     capabilities = capabilities,
 
@@ -185,7 +189,7 @@ lspconfig.clangd.setup {
         "-readability-uppercase-literal-suffix," ..
         "-modernize-use-trailing-return-type," ..
         "'" }
-}
+})
 
 -- local runtime_path = vim.split(package.path, ';')
 -- table.insert(runtime_path, 'lua/?.lua')
@@ -214,7 +218,7 @@ lspconfig.clangd.setup {
 --     }
 -- }
 
-lspconfig.lua_ls.setup {
+setup('lua_ls', {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -223,9 +227,9 @@ lspconfig.lua_ls.setup {
             telemetry = { enable = false }
         }
     }
-}
+})
 
-lspconfig.arduino_language_server.setup {
+setup('arduino_language_server', {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = {
@@ -233,9 +237,9 @@ lspconfig.arduino_language_server.setup {
         '-cli-config', globals.arduinocli_config,
         '-fqbn', globals.arduinolsp_fqbn
     }
-}
+})
 
-lspconfig.zls.setup {
+setup('zls', {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -243,4 +247,4 @@ lspconfig.zls.setup {
             enable_build_on_save = true,
         }
     }
-}
+})
