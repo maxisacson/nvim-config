@@ -129,7 +129,7 @@ local setup = function(lsp, cfg)
 end
 
 -- Servers that don't require special setup
-local servers = { 'cmake', 'ts_ls', 'gopls', 'marksman' }
+local servers = { 'cmake', 'ts_ls', 'gopls', 'marksman', 'bashls' }
 for _, lsp in ipairs(servers) do
     setup(lsp, {
         on_attach = on_attach,
