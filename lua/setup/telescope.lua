@@ -4,9 +4,8 @@ local actions = require 'telescope.actions'
 local telescope = require('telescope')
 
 local telescope_project_files = function()
-    local topts = {} -- define here if you want to define something
-    local ok = pcall(builtin.git_files, topts)
-    if not ok then builtin.find_files(topts) end
+    local ok = pcall(builtin.git_files, { show_untracked = true })
+    if not ok then builtin.find_files() end
 end
 
 local map = function(mode, lhs, rhs, desc)
@@ -14,7 +13,7 @@ local map = function(mode, lhs, rhs, desc)
 end
 
 map('n', '<leader>sf', builtin.find_files, 'Find files')
-map('n', '<leader>sv', builtin.git_files, 'Git files')
+map('n', '<leader>sv', function() builtin.git_files({ show_untracked = true }) end, 'Git files')
 map('n', '<leader>sg', builtin.live_grep, 'Live grep')
 map('n', '<leader>ss', builtin.grep_string, 'Grep string')
 map('v', '<leader>ss', builtin.grep_string, 'Grep string')
