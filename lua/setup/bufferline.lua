@@ -137,8 +137,6 @@ nmap('<M-8>', function() require('bufferline').go_to(8, true) end, 'Go to 8')
 nmap('<M-9>', function() require('bufferline').go_to(9, true) end, 'Go to 9')
 nmap('<M-0>', function() require('bufferline').go_to(-1, true) end, 'Go to last')
 
-nmap('<M-q>', function() require('bufdelete').bufdelete(0, false) end, 'Close buffer')
-nmap('<M-Q>', function() require('bufdelete').bufdelete(0, true) end, 'Force close buffer')
 nmap('<M-i>', ':BufferLineCyclePrev<CR>', 'Cycle previous')
 nmap('<M-o>', ':BufferLineCycleNext<CR>', 'Cycle next')
 nmap('<M-I>', ':BufferLineMovePrev<CR>', 'Move previous')

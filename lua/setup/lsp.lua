@@ -139,8 +139,6 @@ end
 
 -- Servers that do require special setup
 
--- NOTE: To install pylsp-mypy run
---          :PylspInstall pylsp-mypy
 setup('pylsp', {
     on_attach = on_attach,
     capabilities = capabilities,

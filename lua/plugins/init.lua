@@ -22,17 +22,9 @@ return {
     -- vim-fugitive for git integration
     'tpope/vim-fugitive',
 
-    -- nerdcomment for easy commenting
-    {
-        'scrooloose/nerdcommenter',
-        enabled = not globals.disable_nerdcommenter,
-        config = function() require('setup.nerdcommenter') end
-    },
-
     -- Comment.nvim -- like nerdcommenter but in Lua
     {
         'numToStr/Comment.nvim',
-        enabled = not globals.disable_commentnvim,
         config = function() require('setup.comment') end
     },
 
@@ -72,13 +64,6 @@ return {
 
     -- syntax for experimental files
     'maxisacson/vim-rs-experimental-syntax',
-
-    -- clang-format intergration for vim
-    {
-        'rhysd/vim-clang-format',
-        enabled = not globals.disable_clang_format,
-        config = function() require('setup.clang-format') end
-    },
 
     -- LSP configurations for neovim
     {
@@ -153,13 +138,21 @@ return {
         config = function() require('setup.lualine') end
     },
 
+    -- delete buffers without messing up window layouts
+    {
+        'famiu/bufdelete.nvim',
+        config = function()
+            vim.keymap.set('n', '<M-q>', function() require('bufdelete').bufdelete(0, false) end,
+                { silent = true, desc = '[Buffer] Close buffer' })
+            vim.keymap.set('n', '<M-Q>', function() require('bufdelete').bufdelete(0, true) end,
+                { silent = true, desc = '[Buffer] Force close buffer' })
+        end
+    },
+
     -- tabline plugin
     {
         'akinsho/bufferline.nvim',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-            'famiu/bufdelete.nvim',
-        },
+        dependencies = { 'nvim-tree/nvim-web-devicons', },
         config = function()
             require('setup.bufferline')
         end
@@ -169,13 +162,6 @@ return {
     {
         'norcalli/nvim-colorizer.lua',
         config = function() require 'colorizer'.setup() end
-    },
-
-    -- NvimTree alternative to NerdTree
-    {
-        'nvim-tree/nvim-tree.lua',
-        dependencies = 'nvim-tree/nvim-web-devicons',
-        config = function() require('setup.nvim-tree') end
     },
 
     -- Telescope -- modular fuzzy finder
@@ -195,13 +181,6 @@ return {
     {
         'mbbill/undotree',
         config = function() require('setup.undotree') end
-    },
-
-    -- To enable more features from rust-analyzer
-    {
-        'simrat39/rust-tools.nvim',
-        lazy = true,
-        dependencies = 'nvim-lua/popup.nvim'
     },
 
     -- Debugging

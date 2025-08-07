@@ -22,6 +22,8 @@ map('n', '<Leader><', '<C-w>5<')
 
 -- Buffer management
 map('n', '<Leader><Leader>', '<C-^>')
+map('n', '<M-q>', ':bdelete<CR>')
+map('n', '<M-Q>', ':bdelete!<CR>')
 
 -- mappings for quickfix list
 map('n', '<M-n>', ':cnext<CR>')
