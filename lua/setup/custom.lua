@@ -30,10 +30,10 @@ vim.api.nvim_create_autocmd("BufWrite", {
     desc = "Delete trailing white space"
 })
 
--- Auto set cursor line on winenter/winleave. This fixed some issue I can't remember right now
+-- Auto set cursor line when moving between splits
 local ag_clear = vim.api.nvim_create_augroup("AutoClearCursorline", { clear = true })
-vim.api.nvim_create_autocmd("WinEnter", { group = ag_clear, pattern = "*", command = "setlocal cursorline", })
-vim.api.nvim_create_autocmd("WinLeave", { group = ag_clear, pattern = "*", command = "setlocal nocursorline", })
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, { group = ag_clear, pattern = "*", command = "setlocal cursorline", })
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, { group = ag_clear, pattern = "*", command = "setlocal nocursorline", })
 
 -- Highlight yanked text
 local ag_yank = vim.api.nvim_create_augroup("HighlightYank", { clear = true })
