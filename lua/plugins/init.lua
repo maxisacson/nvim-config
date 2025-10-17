@@ -190,6 +190,7 @@ return {
     -- Debugging
     {
         'mfussenegger/nvim-dap',
+        enabled = false,
         lazy = true,
         config = function() require('setup.nvim-dap') end,
         dependencies = {
