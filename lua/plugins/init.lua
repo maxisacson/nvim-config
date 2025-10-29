@@ -268,4 +268,9 @@ return {
             vim.keymap.set("n", "<Leader>ti", "<Cmd>RunCurrentBufferInteractive<CR>")
         end
     },
+
+    -- preview markdown
+    {
+        "maxisacson/markdown-preview.nvim"
+    },
 }
