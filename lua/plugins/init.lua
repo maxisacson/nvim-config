@@ -177,6 +177,7 @@ return {
             { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
             { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-telescope/telescope-file-browser.nvim' },
+            { 'nvim-telescope/telescope-live-grep-args.nvim' },
         },
         config = function() require('setup.telescope') end
     },
