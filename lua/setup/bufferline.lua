@@ -114,8 +114,8 @@ require('bufferline').setup({
             end
             return name
         end,
-        close_command = function(bufnr) require('bufdelete').bufdelete(bufnr, true) end,
-        middle_mouse_command = function(bufnr) require('bufdelete').bufdelete(bufnr, true) end,
+        close_command = function(bufnr) require('setup.utils').delete_buffer(bufnr, true) end,
+        middle_mouse_command = function(bufnr) require('setup.utils').delete_buffer(bufnr, true) end,
         right_mouse_command = nil,
         max_name_length = 32,
     },

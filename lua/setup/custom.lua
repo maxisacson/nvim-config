@@ -114,6 +114,24 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     desc = 'Hide whitespace when entering insert mode'
 })
 
+local function cmd_delete_buffer(args)
+    -- print(vim.inspect(args))
+    local force = args.bang
+    local buf = nil
+
+    if #args.fargs >= 1 then
+        buf = tonumber(args.fargs[1])
+    else
+        buf = buf or vim.api.nvim_get_current_buf()
+    end
+
+    require('setup.utils').delete_buffer(buf, force)
+end
+
+vim.api.nvim_create_user_command("DeleteBuffer", cmd_delete_buffer, { bang = true, nargs = '?' })
+vim.keymap.set('n', '<M-q>', ':DeleteBuffer<CR>', { silent = true, desc = '[Buffer] Close buffer' })
+vim.keymap.set('n', '<M-Q>', ':DeleteBuffer!<CR>', { silent = true, desc = '[Buffer] Force close buffer' })
+
 vim.cmd([[
     " Function to format math expressions inline
     function! PrettifyMath()
