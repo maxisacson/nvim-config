@@ -258,4 +258,14 @@ return {
             },
         },
     },
+
+    -- run current file in a terminal
+    {
+        "maxisacson/termrun.nvim",
+        config = function()
+            require('termrun').setup {}
+            vim.keymap.set("n", "<Leader>tr", "<Cmd>RunCurrentBuffer<CR>")
+            vim.keymap.set("n", "<Leader>ti", "<Cmd>RunCurrentBufferInteractive<CR>")
+        end
+    },
 }
