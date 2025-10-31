@@ -97,6 +97,3 @@ opt.showmode = false
 
 -- allow buffers to be open in the background
 opt.hidden = true
-
--- set default floating window border
-opt.winborder = 'rounded'
