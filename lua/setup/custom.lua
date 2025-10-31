@@ -10,6 +10,8 @@ R = function(name)
     return require(name)
 end
 
+local augroup = vim.api.nvim_create_augroup("CustomAutoCommands", { clear = true })
+
 vim.api.nvim_create_user_command("Reload",
     function(args) return R(args.args) end,
     { force = true, nargs = 1, desc = 'Reload lua module' })
@@ -24,27 +26,26 @@ local trim_white_space = function()
     vim.fn.setpos('.', cursor_pos)
 end
 vim.api.nvim_create_autocmd("BufWrite", {
-    group = vim.api.nvim_create_augroup("NoTrailingWhitespace", { clear = true }),
+    group = augroup,
     pattern = "*",
     callback = trim_white_space,
     desc = "Delete trailing white space"
 })
 
 -- Auto set cursor line when moving between splits
-local ag_clear = vim.api.nvim_create_augroup("AutoClearCursorline", { clear = true })
-vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, { group = ag_clear, pattern = "*", command = "setlocal cursorline", })
-vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, { group = ag_clear, pattern = "*", command = "setlocal nocursorline", })
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, { group = augroup, pattern = "*", command = "setlocal cursorline", })
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, { group = augroup, pattern = "*", command = "setlocal nocursorline", })
 
 -- Highlight yanked text
-local ag_yank = vim.api.nvim_create_augroup("HighlightYank", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-    group = ag_yank,
+    group = augroup,
     pattern = "*",
     callback = function()
         vim.highlight.on_yank({
             higroup = "Visual",
         })
-    end
+    end,
+    desc = "Highlight on yank"
 })
 
 -- Function to insert include guards in cpp headers
@@ -95,9 +96,8 @@ end
 vim.keymap.set('n', '<Leader>X', lua_exec_and_insert_line, { desc = 'Execute current line in Lua and insert result below)' })
 
 -- show whitespace in insert mode
-local ag_whitespace = vim.api.nvim_create_augroup("InsertModeListChars", { clear = true })
 vim.api.nvim_create_autocmd("InsertEnter", {
-    group = ag_whitespace,
+    group = augroup,
     pattern = "*",
     callback = function()
         local spaces = vim.opt.tabstop:get()
@@ -106,7 +106,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     desc = 'Show whitespace when entering insert mode'
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
-    group = ag_whitespace,
+    group = augroup,
     pattern = "*",
     callback = function()
         vim.opt_local.listchars:remove('leadmultispace')
@@ -128,16 +128,16 @@ vim.keymap.set('n', '<leader>ge', function()
 end, { desc = "Expand sign column" })
 vim.api.nvim_create_autocmd({ "BufDelete", "BufUnload" }, {
     pattern = '*',
-    group = vim.api.nvim_create_augroup("AutoResetSigncolumn", { clear = true }),
+    group = augroup,
     callback = function()
         if saved_signcolumn ~= nil then
             vim.wo.signcolumn = saved_signcolumn
         end
-    end
+    end,
+    desc = "Reset signcolumn on exit"
 })
 
 local function cmd_delete_buffer(args)
-    -- print(vim.inspect(args))
     local force = args.bang
     local buf = nil
 
