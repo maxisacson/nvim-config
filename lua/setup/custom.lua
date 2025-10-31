@@ -153,29 +153,3 @@ end
 vim.api.nvim_create_user_command("DeleteBuffer", cmd_delete_buffer, { bang = true, nargs = '?' })
 vim.keymap.set('n', '<M-q>', ':DeleteBuffer<CR>', { silent = true, desc = '[Buffer] Close buffer' })
 vim.keymap.set('n', '<M-Q>', ':DeleteBuffer!<CR>', { silent = true, desc = '[Buffer] Force close buffer' })
-
-vim.cmd([[
-    " Function to format math expressions inline
-    function! PrettifyMath()
-        " remove whitespace around *, /, and ^
-        s/\s*\(\*\|\/\|\^\|(\|)\)\s*/\1/ge
-
-        " padd +, - and = with whitespace
-        s/\(+\|-\|=\)/ \1 /ge
-
-        " remove unnecessary trailing 0's
-        s/0\+$/0/ge
-
-        " remove unnecessary whitespace
-        s/\s\+/ /ge
-        s/^\s\+//ge
-        s/\(\d\+\)\s\+\(\d\+\)\+/\1\2/ge
-
-        " make sure negative numbers are written correctly
-        s/\(^\|=\s\)-\s/\1-/ge
-    endfunction
-    " Evaluate current line using bc and make it pretty
-    nnoremap <Leader>= :s/=.*$//ge<CR>yypkA=<Esc>j:.!bc -l<CR>kJ:call PrettifyMath()<CR>
-    " Evaluate current selection using bc and make it pretty
-    vnoremap <Leader>= y'>p:'[,']s/^.*=//ge<CR>:'[,']-1s/\n/+/ge<CR>:s/+$//ge<CR>:.!bc -l<CR>I= <Esc>:'<,'>call PrettifyMath()<CR>j
-]])
