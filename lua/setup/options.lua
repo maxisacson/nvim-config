@@ -9,8 +9,7 @@ opt.expandtab = true               -- use spaces as <Tab>
 opt.smarttab = true                -- insert shiftwidth worth of whitespace at beginning of line
 opt.backspace = 'indent,eol,start' -- make <BS> well behaved
 opt.autoindent = true              -- make sure autoindent is turned on
-opt.smartindent = true
-opt.cinoptions = 'l1,g0.75s,h0.25s,N-s'
+opt.smartindent = true             -- smart indenting for C-like languages
 
 -- Format options
 opt.textwidth = 80
