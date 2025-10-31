@@ -114,6 +114,28 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     desc = 'Hide whitespace when entering insert mode'
 })
 
+local saved_signcolumn = nil
+vim.keymap.set('n', '<leader>ge', function()
+    if saved_signcolumn == nil then
+        saved_signcolumn = vim.wo.signcolumn
+    end
+
+    if vim.wo.signcolumn == saved_signcolumn then
+        vim.wo.signcolumn = "yes:2"
+    elseif vim.wo.signcolumn ~= saved_signcolumn then
+        vim.wo.signcolumn = saved_signcolumn
+    end
+end, { desc = "Expand sign column" })
+vim.api.nvim_create_autocmd({ "BufDelete", "BufUnload" }, {
+    pattern = '*',
+    group = vim.api.nvim_create_augroup("AutoResetSigncolumn", { clear = true }),
+    callback = function()
+        if saved_signcolumn ~= nil then
+            vim.wo.signcolumn = saved_signcolumn
+        end
+    end
+})
+
 local function cmd_delete_buffer(args)
     -- print(vim.inspect(args))
     local force = args.bang
