@@ -6,5 +6,6 @@ function M.setup(opt)
     require('setup.lazy')
     require('setup.terminal')
     require('setup.custom')
+    require('setup.lsp')
 end
 return M

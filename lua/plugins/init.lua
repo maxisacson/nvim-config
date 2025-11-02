@@ -65,17 +65,34 @@ return {
     -- syntax for experimental files
     'maxisacson/vim-rs-experimental-syntax',
 
+    -- status spinner and notify backend
+    {
+        'j-hui/fidget.nvim',
+        opts = {}
+    },
+
+    -- Package manager for LSPs/DAPs/linters/formatters
+    {
+        'mason-org/mason.nvim',
+        opts = {}
+    },
+
     -- LSP configurations for neovim
     {
         'neovim/nvim-lspconfig',
         enabled = not globals.disable_lsp,
-        config = function() require('setup.lsp') end,
+    },
+
+    -- Automatically enable installed servers (vim.lsp.enable)
+    {
+        'mason-org/mason-lspconfig.nvim',
+        opts = {
+            ensure_installed = { 'lua_ls' },
+        },
         dependencies = {
-            'mason-org/mason.nvim',
-            'mason-org/mason-lspconfig.nvim',
-            'j-hui/fidget.nvim',     -- lsp status spinner
-            'folke/lsp-colors.nvim', -- better support for lsp colors
-        }
+            'mason.nvim',
+            'nvim-lspconfig',
+        },
     },
 
     -- live parameter hints

@@ -1,16 +1,3 @@
-local globals = require('setup.globals')
-
-require('mason').setup()
-require('mason-lspconfig').setup({
-    ensure_installed = {
-        'pylsp', 'cmake', 'lua_ls', 'marksman'
-    }
-})
-require('fidget').setup({})
-
-require('lspconfig') -- I don't think this is needed anymore
-local telescope_ok, telescope = pcall(require, 'telescope.builtin')
-
 vim.diagnostic.config({
     signs = {
         text = {
@@ -22,7 +9,10 @@ vim.diagnostic.config({
     }
 })
 
-local on_attach = function(client, bufnr)
+local lsp_attach = function(args)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    local bufnr = args.buf
+
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Mappings.
@@ -38,14 +28,15 @@ local on_attach = function(client, bufnr)
         'List workspace folders')
     map('n', '<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
     map('n', '<leader>e', vim.diagnostic.open_float, 'Open diagnostics under cursor')
-    map('n', '[d', function() vim.diagnostic.jump({count=-1, float=true}) end, 'Goto prev diagnostic')
-    map('n', ']d', function() vim.diagnostic.jump({count=1, float=true}) end, 'Goto next diagnostic')
+    map('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Goto prev diagnostic')
+    map('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Goto next diagnostic')
     map('n', '<leader>a', vim.lsp.buf.code_action, 'Code action')
     map('n', 'gK', function()
         local opt = vim.diagnostic.config().virtual_lines
         vim.diagnostic.config({ virtual_lines = not opt })
     end, 'Toggle diagnostic virtual lines')
 
+    local telescope_ok, telescope = pcall(require, 'telescope.builtin')
     if telescope_ok then
         map('n', 'gr', telescope.lsp_references, 'Goto reference')
         map('n', 'gd', telescope.lsp_definitions, 'Goto definition')
@@ -99,7 +90,6 @@ local on_attach = function(client, bufnr)
 
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
-
         local g = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
         vim.api.nvim_create_autocmd('CursorHold',
             { group = g, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
@@ -121,94 +111,11 @@ local on_attach = function(client, bufnr)
     }, vim.lsp.diagnostic.get_namespace(client.id))
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local setup = function(lsp, cfg)
-    vim.lsp.config(lsp, cfg)
-    vim.lsp.enable(lsp)
-end
-
--- Servers that don't require special setup
-local servers = { 'cmake', 'ts_ls', 'gopls', 'marksman', 'bashls' }
-for _, lsp in ipairs(servers) do
-    setup(lsp, {
-        on_attach = on_attach,
-        capabilities = capabilities
-    })
-end
-
--- Servers that do require special setup
-
-setup('pylsp', {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = { ignore = { 'E501', 'E231', 'E226', 'E402' } },
-            }
-        }
-    },
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('MyLspConfig', { clear = true }),
+    callback = lsp_attach,
 })
 
-setup('clangd', {
-    on_attach = on_attach,
-    capabilities = capabilities,
-
-    cmd = { "clangd",
-        "--background-index",
-        "--compile-commands-dir=build",
-        "--clang-tidy",
-        "--clang-tidy-checks='" ..
-        "-*," ..
-        "clang-analyzer-*," ..
-        "modernize-*," ..
-        "readability-*," ..
-        "performance-*," ..
-        "cppcoreguidelines-*," ..
-        "bugprone-*," ..
-        "cert-*," ..
-        "hicpp-*," ..
-        "-cppcoreguidelines-pro-bounds-constant-array-index," ..
-        "-cppcoreguidelines-pro-bounds-array-to-pointer-decay," ..
-        "-cppcoreguidelines-avoid-magic-numbers," ..
-        "-readability-braces-around-statements," ..
-        "-readability-magic-numbers," ..
-        "-hicpp-braces-around-statements," ..
-        "-hicpp-no-array-decay," ..
-        "-hicpp-uppercase-literal-suffix," ..
-        "-readability-uppercase-literal-suffix," ..
-        "-modernize-use-trailing-return-type," ..
-        "'" }
-})
-
-setup('lua_ls', {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        Lua = {
-            workspace = { checkThirdParty = false, },
-            telemetry = { enable = false }
-        }
-    }
-})
-
-setup('arduino_language_server', {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = {
-        globals.arduinolsp_cmd,
-        '-cli-config', globals.arduinocli_config,
-        '-fqbn', globals.arduinolsp_fqbn
-    }
-})
-
-setup('zls', {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        zls = {
-            enable_build_on_save = true,
-        }
-    }
+vim.lsp.config('*', {
+    capabilities = require('cmp_nvim_lsp').default_capabilities()
 })
