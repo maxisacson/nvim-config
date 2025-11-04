@@ -9,6 +9,8 @@ vim.diagnostic.config({
     }
 })
 
+local augroup = vim.api.nvim_create_augroup('MyLspConfig', { clear = true })
+
 local lsp_attach = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     local bufnr = args.buf
@@ -45,12 +47,12 @@ local lsp_attach = function(args)
         map('n', 'gi', telescope.lsp_implementations, 'Goto implementation')
         map('n', '<leader>ds', telescope.lsp_document_symbols, 'List document symbols')
         map('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'List workspace symbols')
-        map('n', '<leader>dq', function() telescope.diagnostics({ bufnr = 0 }) end, 'Open document diagnostics')
+        map('n', '<leader>dq', function() telescope.diagnostics({ bufnr = bufnr }) end, 'Open document diagnostics')
         map('n', '<leader>wq', telescope.diagnostics, 'Open workspace diagnostics')
-        map('n', '<leader>dQ', function() telescope.diagnostics({ bufnr = 0, severity = "error" }) end,
+        map('n', '<leader>dQ', function() telescope.diagnostics({ bufnr = bufnr, severity = "error" }) end,
             'Open document diagnostics (errors)')
         map('n', '<leader>wQ', function() telescope.diagnostics({ severity = "error" }) end,
-            'Open document diagnostics (errors)')
+            'Open workspace diagnostics (errors)')
     else
         map('n', 'gr', vim.lsp.buf.references, 'Goto reference')
         map('n', 'gd', vim.lsp.buf.definition, 'Goto definition')
@@ -90,14 +92,14 @@ local lsp_attach = function(args)
 
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
-        local g = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
         vim.api.nvim_create_autocmd('CursorHold',
-            { group = g, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
-        vim.api.nvim_create_autocmd('CursorMoved', { group = g, buffer = bufnr, callback = vim.lsp.buf.clear_references })
+            { group = augroup, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+        vim.api.nvim_create_autocmd('CursorMoved',
+            { group = augroup, buffer = bufnr, callback = vim.lsp.buf.clear_references })
     end
 
     vim.api.nvim_create_autocmd('CursorHold', {
-        group = vim.api.nvim_create_augroup("LspDiagnosticHover", { clear = true }),
+        group = augroup,
         buffer = bufnr,
         callback = function()
             vim.diagnostic.open_float({ show_header = false, focusable = false })
@@ -112,7 +114,7 @@ local lsp_attach = function(args)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('MyLspConfig', { clear = true }),
+    group = augroup,
     callback = lsp_attach,
 })
 
