@@ -153,3 +153,15 @@ end
 vim.api.nvim_create_user_command("DeleteBuffer", cmd_delete_buffer, { bang = true, nargs = '?' })
 vim.keymap.set('n', '<M-q>', ':DeleteBuffer<CR>', { silent = true, desc = '[Buffer] Close buffer' })
 vim.keymap.set('n', '<M-Q>', ':DeleteBuffer!<CR>', { silent = true, desc = '[Buffer] Force close buffer' })
+
+vim.cmd[[
+augroup RestoreCursor
+  autocmd!
+  autocmd BufReadPre * autocmd FileType <buffer> ++once
+    \ let s:line = line("'\"")
+    \ | if s:line >= 1 && s:line <= line("$") && &filetype !~# 'commit'
+    \      && index(['xxd', 'gitrebase'], &filetype) == -1
+    \ |   execute "normal! g`\""
+    \ | endif
+augroup END
+]]
