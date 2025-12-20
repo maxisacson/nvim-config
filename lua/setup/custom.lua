@@ -169,7 +169,7 @@ vim.api.nvim_create_autocmd('BufReadPre', {
                     and string.match(ft, 'commit') == nil
                     and ft ~= 'xxd' and ft ~= 'gitrebase' then
 
-                    vim.cmd[[normal! g`"]]
+                    vim.cmd[[normal! g`"zz]]
                 end
             end
         })
