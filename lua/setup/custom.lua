@@ -154,14 +154,24 @@ vim.api.nvim_create_user_command("DeleteBuffer", cmd_delete_buffer, { bang = tru
 vim.keymap.set('n', '<M-q>', ':DeleteBuffer<CR>', { silent = true, desc = '[Buffer] Close buffer' })
 vim.keymap.set('n', '<M-Q>', ':DeleteBuffer!<CR>', { silent = true, desc = '[Buffer] Force close buffer' })
 
-vim.cmd[[
-augroup RestoreCursor
-  autocmd!
-  autocmd BufReadPre * autocmd FileType <buffer> ++once
-    \ let s:line = line("'\"")
-    \ | if s:line >= 1 && s:line <= line("$") && &filetype !~# 'commit'
-    \      && index(['xxd', 'gitrebase'], &filetype) == -1
-    \ |   execute "normal! g`\""
-    \ | endif
-augroup END
-]]
+vim.api.nvim_create_autocmd('BufReadPre', {
+    pattern = '*',
+    group = augroup,
+    desc = "Reset cursor position",
+    callback = function(args)
+        vim.api.nvim_create_autocmd('FileType', {
+            buffer = args.buf,
+            once = true,
+            callback = function()
+                local line = vim.fn.line([['"]])
+                local ft = vim.bo.filetype
+                if line >= 1 and line <= vim.fn.line("$")
+                    and string.match(ft, 'commit') == nil
+                    and ft ~= 'xxd' and ft ~= 'gitrebase' then
+
+                    vim.cmd[[normal! g`"]]
+                end
+            end
+        })
+    end
+})
