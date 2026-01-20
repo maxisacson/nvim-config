@@ -225,7 +225,7 @@ return {
             vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
             require('auto-session').setup({
                 log_level = "error",
-                allowed_dirs = { '~/git/*', '~/work/*', '~/work/*/*', '~/.config/nvim' },
+                allowed_dirs = { '~/git/*', '~/work/*', '~/work/*/*', '~/work/*/*/*', '~/.config/nvim' },
             })
         end
     },
