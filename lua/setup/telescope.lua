@@ -18,6 +18,7 @@ map('n', '<leader>sv', function() builtin.git_files({ show_untracked = true }) e
 map('n', '<leader>sg', builtin.live_grep, 'Live grep')
 map('n', '<leader>su', extensions.live_grep_args.live_grep_args, 'Live grep (args)')
 map('n', '<leader>ss', builtin.grep_string, 'Grep string')
+map('v', '<leader>ss', builtin.grep_string, 'Grep string')
 map('n', '<leader>sb', builtin.buffers, 'Buffers')
 map('n', '<leader>sh', builtin.help_tags, 'Help tags')
 map('n', '<leader>sk', builtin.keymaps, 'Keymaps')
