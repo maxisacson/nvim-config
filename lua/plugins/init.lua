@@ -132,10 +132,8 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         enabled = not globals.disable_treesitter,
-        branch = 'master',
         lazy = false,
         build = ':TSUpdate',
-        config = function() require('setup.treesitter') end
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
