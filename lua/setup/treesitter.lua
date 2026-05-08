@@ -45,14 +45,16 @@ local ignore_lang = {
     'c', 'lua', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc'
 }
 
+local ignore_indent = {}
+
 local filetypes = vim.iter(vim.tbl_map(
-        function(lang)
-            if vim.tbl_contains(ignore_lang, lang) then
-                return nil
-            end
-            return vim.treesitter.language.get_filetypes(lang)
-        end, nts.get_available())
-    ):flatten():totable()
+    function(lang)
+        if vim.tbl_contains(ignore_lang, lang) then
+            return nil
+        end
+        return vim.treesitter.language.get_filetypes(lang)
+    end, nts.get_available())
+):flatten():totable()
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = filetypes,
@@ -67,6 +69,9 @@ vim.api.nvim_create_autocmd('FileType', {
         end
 
         vim.treesitter.start()
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        if not vim.tbl_contains(ignore_indent, lang) then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
     end
 })
