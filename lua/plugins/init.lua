@@ -180,12 +180,6 @@ return {
         end
     },
 
-    -- visualize color codes
-    {
-        'norcalli/nvim-colorizer.lua',
-        config = function() require 'colorizer'.setup() end
-    },
-
     -- Telescope -- modular fuzzy finder
     {
         'nvim-telescope/telescope.nvim',
