@@ -25,13 +25,31 @@ return {
     -- Comment.nvim -- like nerdcommenter but in Lua
     {
         'numToStr/Comment.nvim',
-        config = function() require('setup.comment') end
+        -- config = function() require('setup.comment') end
+        opts = {
+            toggler = {
+                line = '<Leader>c',
+                block = '<Leader>bc'
+            },
+            opleader = {
+                line = '<Leader>c',
+                block = '<Leader>bc'
+            },
+            extra = {
+                above = '<Leader>OC',
+                below = '<Leader>oc',
+                eol = '<Leader>C',
+            }
+        }
     },
 
     -- vim-easy-align for easy alignment
     {
         'junegunn/vim-easy-align',
-        config = function() require('setup.easyalign') end
+        config = function()
+            vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {})
+            vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
+        end
     },
 
     -- vim-surround
@@ -99,15 +117,14 @@ return {
     {
         'ray-x/lsp_signature.nvim',
         enabled = not globals.disable_lsp_signature,
-        config = function()
-            require 'lsp_signature'.setup({
-                floating_window = true, -- show signature in floating window
-                hint_enable = false,    -- disable virtual text
-                handler_opts = {
-                    border = 'none',
-                }
-            })
-        end
+        event = 'InsertEnter',
+        opts = {
+            floating_window = true, -- show signature in floating window
+            hint_enable = false,    -- disable virtual text
+            handler_opts = {
+                border = 'none',
+            }
+        }
     },
 
     -- nvim-cmp for autocompletion
@@ -175,7 +192,7 @@ return {
         enabled = not globals.disable_telescope,
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
+            { 'nvim-telescope/telescope-fzf-native.nvim',    build = 'make' },
             { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-telescope/telescope-file-browser.nvim' },
             { 'nvim-telescope/telescope-live-grep-args.nvim' },
@@ -186,31 +203,31 @@ return {
     -- Visualize the undo tree
     {
         'mbbill/undotree',
-        config = function() require('setup.undotree') end
+        config = function()
+            vim.keymap.set('n', '<leader>ut', vim.cmd.UndotreeToggle)
+        end
     },
 
     -- Tmux integration
     {
         'aserowy/tmux.nvim',
-        config = function()
-            require('tmux').setup({
-                navigation = {
-                    cycle_navigation = false,
-                    enable_default_keybindings = true,
-                    persist_zoom = false,
-                },
-                copy_sync = {
-                    enable = false,
-                },
-            })
-        end,
+        opts = {
+            navigation = {
+                cycle_navigation = false,
+                enable_default_keybindings = true,
+                persist_zoom = false,
+            },
+            copy_sync = {
+                enable = false,
+            },
+        }
     },
 
     -- Session managment
     {
         'rmagatti/auto-session',
         config = function()
-            vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+            vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
             require('auto-session').setup({
                 log_level = "error",
                 allowed_dirs = { '~/git/*', '~/work/*', '~/work/*/*', '~/.config/nvim' },
