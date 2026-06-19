@@ -189,20 +189,6 @@ return {
         config = function() require('setup.undotree') end
     },
 
-    -- Debugging
-    {
-        'mfussenegger/nvim-dap',
-        enabled = false,
-        lazy = true,
-        config = function() require('setup.nvim-dap') end,
-        dependencies = {
-            'rcarriga/nvim-dap-ui',
-            'nvim-telescope/telescope-dap.nvim',
-            'theHamsta/nvim-dap-virtual-text',
-            'mfussenegger/nvim-dap-python',
-        }
-    },
-
     -- Tmux integration
     {
         'aserowy/tmux.nvim',
