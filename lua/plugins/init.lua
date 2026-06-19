@@ -160,17 +160,6 @@ return {
         config = function() require('setup.lualine') end
     },
 
-    -- delete buffers without messing up window layouts
-    -- {
-    --     'famiu/bufdelete.nvim',
-    --     config = function()
-    --         vim.keymap.set('n', '<M-q>', function() require('bufdelete').bufdelete(0, false) end,
-    --             { silent = true, desc = '[Buffer] Close buffer' })
-    --         vim.keymap.set('n', '<M-Q>', function() require('bufdelete').bufdelete(0, true) end,
-    --             { silent = true, desc = '[Buffer] Force close buffer' })
-    --     end
-    -- },
-
     -- tabline plugin
     {
         'akinsho/bufferline.nvim',
