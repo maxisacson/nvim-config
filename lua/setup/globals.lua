@@ -1,13 +1,5 @@
 local M = {
     -- Default values
-    disable_telescope = false,
-    disable_lsp = false,
-    disable_treesitter = false,
-    disable_nvim_cmp = false,
-    disable_lsp_signature = false,
-
-    python3_host_prog = "", -- empty for default
-
     arduinolsp_cmd = 'arduino-language-server',
     arduinolsp_fqbn = 'arduino:avr:uno',
     arduinocli_config = vim.env['HOME'] .. '/.arduino15/arduino-cli.yaml',

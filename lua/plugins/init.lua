@@ -98,7 +98,6 @@ return {
     -- LSP configurations for neovim
     {
         'neovim/nvim-lspconfig',
-        enabled = not globals.disable_lsp,
     },
 
     -- Automatically enable installed servers (vim.lsp.enable)
@@ -116,7 +115,6 @@ return {
     -- live parameter hints
     {
         'ray-x/lsp_signature.nvim',
-        enabled = not globals.disable_lsp_signature,
         event = 'InsertEnter',
         opts = {
             floating_window = true, -- show signature in floating window
@@ -130,7 +128,6 @@ return {
     -- nvim-cmp for autocompletion
     {
         'hrsh7th/nvim-cmp',
-        enabled = not globals.disable_nvim_cmp,
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'L3MON4D3/LuaSnip' },         -- snippet plugin
@@ -148,7 +145,6 @@ return {
     -- treesitter
     {
         'nvim-treesitter/nvim-treesitter',
-        enabled = not globals.disable_treesitter,
         lazy = false,
         build = ':TSUpdate',
         config = function() require('setup.treesitter') end
@@ -189,7 +185,6 @@ return {
     -- Telescope -- modular fuzzy finder
     {
         'nvim-telescope/telescope.nvim',
-        enabled = not globals.disable_telescope,
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-telescope/telescope-fzf-native.nvim',    build = 'make' },
