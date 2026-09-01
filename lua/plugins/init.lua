@@ -265,4 +265,9 @@ return {
     {
         "maxisacson/markdown-preview.nvim"
     },
+
+    -- use external linters and formatters with neovim lsp
+    {
+        'creativenull/efmls-configs-nvim',
+    },
 }
