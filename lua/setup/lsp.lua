@@ -118,6 +118,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = lsp_attach,
 })
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 vim.lsp.config('*', {
-    capabilities = require('cmp_nvim_lsp').default_capabilities()
+    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 })
