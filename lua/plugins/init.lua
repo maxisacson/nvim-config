@@ -144,7 +144,8 @@ return {
 
     -- treesitter
     {
-        'nvim-treesitter/nvim-treesitter',
+        'maxisacson/nvim-treesitter',
+        branch = 'dev',
         lazy = false,
         build = ':TSUpdate',
         config = function() require('setup.treesitter') end
