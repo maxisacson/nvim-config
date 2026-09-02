@@ -24,6 +24,7 @@ map('n', '<leader>sh', builtin.help_tags, 'Help tags')
 map('n', '<leader>sk', builtin.keymaps, 'Keymaps')
 map('n', '<leader>se', extensions.file_browser.file_browser, 'File Browser')
 map('n', '<leader>sr', builtin.resume, 'Resume picker')
+map('n', '<leader>sR', builtin.registers, 'Registers')
 
 map('n', '<C-p>', telescope_project_files, 'Project files')
 map('n', '<C-Space>', builtin.buffers, 'Buffers')
