@@ -150,14 +150,6 @@ return {
         build = ':TSUpdate',
         config = function() require('setup.treesitter') end
     },
-    {
-        'nvim-treesitter/nvim-treesitter-context',
-        dependencies = 'nvim-treesitter',
-        opts = {
-            max_lines = 3,
-            trim_scope = 'inner',
-        },
-    },
 
     {
         'lewis6991/gitsigns.nvim',

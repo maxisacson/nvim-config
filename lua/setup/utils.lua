@@ -62,4 +62,64 @@ function M.delete_buffer(buf, force)
     end
 end
 
+function M.ts_get_context_name()
+    local parser = vim.treesitter.get_parser()
+
+    if not parser then
+        return ""
+    end
+
+    local tree = parser:parse()[1]
+
+    if not tree then
+        return ""
+    end
+
+    local root = tree:root()
+
+    if not root then
+        return ""
+    end
+
+    local query = vim.treesitter.query.get(parser:lang(), "where");
+
+    if not query then
+        return ""
+    end
+
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local function_name = nil
+    local is_contained = false
+
+    for _, match, _ in query:iter_matches(root, 0) do
+        function_name = nil
+        is_contained = false
+
+        for id, nodes in pairs(match) do
+            local name = query.captures[id]
+            local node = nodes[#nodes]
+
+            if node:has_error() then
+                break;
+            end
+
+            if name == "where.function.name" then
+                function_name = vim.treesitter.get_node_text(node, 0)
+            elseif name == "where.function" then
+                is_contained = vim.treesitter.is_in_node_range(node, cursor[1] - 1, cursor[2])
+            end
+        end
+
+        if is_contained then
+            break
+        end
+    end
+
+    if is_contained then
+        return function_name
+    else
+        return ""
+    end
+end
+
 return M

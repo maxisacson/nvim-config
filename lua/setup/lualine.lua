@@ -90,6 +90,9 @@ require('lualine').setup(
             lualine_c = {
                 {
                     'filename',
+                },
+                {
+                    require('setup.utils').ts_get_context_name
                 }
             },
             lualine_x = {
