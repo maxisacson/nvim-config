@@ -10,10 +10,16 @@ vim.diagnostic.config({
 })
 
 local augroup = vim.api.nvim_create_augroup('MyLspConfig', { clear = true })
+local disable_lsp_in_diff_mode = false
 
 local lsp_attach = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     local bufnr = args.buf
+
+    if disable_lsp_in_diff_mode then
+        client:stop()
+        return
+    end
 
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -45,7 +51,8 @@ local lsp_attach = function(args)
         map('n', 'gs', function() telescope.lsp_definitions({ jump_type = 'vsplit' }) end, 'Goto definition (vsplit)')
         map('n', '<leader>D', telescope.lsp_type_definitions, 'Goto type definition')
         map('n', 'gi', telescope.lsp_implementations, 'Goto implementation')
-        map('n', '<leader>ds', function() telescope.lsp_document_symbols({ symbol_width = 60 }) end, 'List document symbols')
+        map('n', '<leader>ds', function() telescope.lsp_document_symbols({ symbol_width = 60 }) end,
+            'List document symbols')
         map('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'List workspace symbols')
         map('n', '<leader>dq', function() telescope.diagnostics({ bufnr = bufnr }) end, 'Open document diagnostics')
         map('n', '<leader>wq', telescope.diagnostics, 'Open workspace diagnostics')
@@ -116,6 +123,25 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
     group = augroup,
     callback = lsp_attach,
+})
+
+vim.api.nvim_create_autocmd('VimEnter', {
+    group = augroup,
+    callback = function()
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+            if vim.api.nvim_get_option_value("diff", { win = win }) then
+                disable_lsp_in_diff_mode = true
+                break
+            end
+        end
+
+        if disable_lsp_in_diff_mode then
+            for _, client in ipairs(vim.lsp.get_clients()) do
+                client:stop()
+            end
+            vim.diagnostic.reset()
+        end
+    end
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
